@@ -1,0 +1,11 @@
+title: NoAnyStory
+description: "A collection of stories — real, raw, and unfiltered."
+baseurl: "/NoAnyStory"
+url: "https://gamercr4cked.github.io"
+markdown: kramdown
+kramdown:
+  input: GFM
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

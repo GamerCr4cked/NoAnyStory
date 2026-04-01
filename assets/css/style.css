@@ -1,0 +1,685 @@
+/* ============================================
+   NoAnyStory — Dark Warm Theme
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg-primary: #0a0e14;
+  --bg-secondary: #111720;
+  --bg-card: #151c27;
+  --bg-card-hover: #1a2332;
+  --bg-bubble-her: rgba(244, 160, 181, 0.1);
+  --bg-bubble-him: rgba(88, 166, 255, 0.08);
+  --border: #1e2a3a;
+  --border-light: #253245;
+  --text-primary: #e8edf4;
+  --text-secondary: #8b95a5;
+  --text-muted: #5a6577;
+  --accent: #e8b059;
+  --accent-hover: #f0c478;
+  --accent-subtle: rgba(232, 176, 89, 0.08);
+  --accent-glow: rgba(232, 176, 89, 0.15);
+  --dialogue-her: #f4a0b5;
+  --dialogue-her-dark: rgba(244, 160, 181, 0.15);
+  --dialogue-him: #6db3f2;
+  --dialogue-him-dark: rgba(109, 179, 242, 0.12);
+  --highlight: #c9a0dc;
+  --divider: linear-gradient(90deg, transparent, var(--border-light) 20%, var(--border-light) 80%, transparent);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  font-size: 15px;
+  min-height: 100vh;
+}
+
+/* Subtle background texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(232, 176, 89, 0.03) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(244, 160, 181, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Layout ---- */
+.site-wrapper {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Top Bar ---- */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 14, 20, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+.site-logo:hover {
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
+.back-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* ---- Content Area ---- */
+.content-area {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 40px 80px;
+  flex: 1;
+}
+
+/* ============================================
+   HOME PAGE — Story Cards
+   ============================================ */
+
+.home-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.home-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.home-header h1 span {
+  color: var(--accent);
+}
+
+.home-header p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.story-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--dialogue-her));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.story-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-light);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.story-card:hover::before {
+  opacity: 1;
+}
+
+.story-card .card-genre {
+  display: inline-flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.story-card .tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  border: 1px solid rgba(232, 176, 89, 0.15);
+}
+
+.story-card .tag.mood {
+  background: var(--dialogue-her-dark);
+  color: var(--dialogue-her);
+  border-color: rgba(244, 160, 181, 0.15);
+}
+
+.story-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.story-card .card-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.story-card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.story-card .card-lang {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.story-card .read-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s;
+}
+
+.story-card:hover .read-link {
+  gap: 8px;
+}
+
+/* Coming soon card */
+.story-card.coming-soon {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.story-card.coming-soon h3 {
+  color: var(--text-muted);
+}
+
+/* ============================================
+   STORY PAGE
+   ============================================ */
+
+/* Chapter Navigation */
+.chapter-nav {
+  position: sticky;
+  top: 57px;
+  z-index: 90;
+  background: rgba(10, 14, 20, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 40px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chapter-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.chapter-pill {
+  flex-shrink: 0;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.chapter-pill:hover {
+  color: var(--text-primary);
+  border-color: var(--border-light);
+  background: var(--bg-card-hover);
+}
+
+.chapter-pill.active {
+  color: var(--accent);
+  background: var(--accent-subtle);
+  border-color: rgba(232, 176, 89, 0.25);
+}
+
+/* Story Header */
+.story-header {
+  text-align: center;
+  padding: 60px 40px 40px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.story-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.story-meta {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.story-meta .tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  border: 1px solid rgba(232, 176, 89, 0.15);
+}
+
+.story-tagline {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Story Content */
+.story-content {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px 40px 80px;
+}
+
+/* Chapter headings */
+.chapter-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 3em 0 1.5em;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.chapter-heading:first-child {
+  margin-top: 0;
+}
+
+/* Narrative text */
+.story-content p {
+  margin-bottom: 1em;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.story-content p strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.story-content p em {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Highlighted / emotional moments */
+.moment {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.thought {
+  font-style: italic;
+  color: var(--highlight);
+  opacity: 0.85;
+}
+
+.emphasis {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  display: block;
+  margin: 1.5em 0;
+  line-height: 1.5;
+}
+
+.emphasis.golden {
+  color: var(--accent);
+}
+
+/* Section dividers */
+.story-divider {
+  border: none;
+  height: 1px;
+  background: var(--divider);
+  margin: 2.5em 0;
+}
+
+.story-divider.major {
+  margin: 3.5em auto;
+  width: 60%;
+  height: 0;
+  border: none;
+  background: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-divider.major::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--divider);
+}
+
+.story-divider.major::after {
+  content: '***';
+  position: relative;
+  color: var(--accent);
+  font-size: 14px;
+  letter-spacing: 8px;
+  background: var(--bg-primary);
+  padding: 0 16px;
+  z-index: 1;
+}
+
+/* ---- Chat Bubbles ---- */
+.dialogue {
+  margin: 1.5em 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialogue.her {
+  align-items: flex-start;
+}
+
+.dialogue.him {
+  align-items: flex-end;
+}
+
+.dialogue .speaker {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 6px;
+  padding: 0 14px;
+}
+
+.dialogue.her .speaker {
+  color: var(--dialogue-her);
+}
+
+.dialogue.him .speaker {
+  color: var(--dialogue-him);
+}
+
+.bubble {
+  max-width: 75%;
+  padding: 14px 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  position: relative;
+  animation: bubbleFadeIn 0.3s ease;
+}
+
+@keyframes bubbleFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dialogue.her .bubble {
+  background: var(--bg-bubble-her);
+  border: 1px solid rgba(244, 160, 181, 0.12);
+  border-radius: 4px var(--radius-md) var(--radius-md) var(--radius-md);
+  color: var(--dialogue-her);
+}
+
+.dialogue.him .bubble {
+  background: var(--bg-bubble-him);
+  border: 1px solid rgba(109, 179, 242, 0.1);
+  border-radius: var(--radius-md) 4px var(--radius-md) var(--radius-md);
+  color: var(--dialogue-him);
+}
+
+/* Inline reactions / short lines below bubbles */
+.reaction {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0.5em 0 0;
+  font-style: italic;
+}
+
+/* Lists in story */
+.story-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 1em 0;
+}
+
+.story-content ul li {
+  padding-left: 20px;
+  position: relative;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.story-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+/* Story ending */
+.story-end {
+  text-align: center;
+  margin: 4em 0 2em;
+  padding: 40px;
+}
+
+.story-end .end-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6em;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.story-end .end-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: auto;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  .top-bar {
+    padding: 14px 20px;
+  }
+
+  .content-area {
+    padding: 40px 20px 60px;
+  }
+
+  .home-header h1 {
+    font-size: 2.2em;
+  }
+
+  .stories-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .story-card {
+    padding: 24px 20px;
+  }
+
+  .chapter-nav {
+    padding: 10px 16px;
+    gap: 6px;
+  }
+
+  .chapter-pill {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+
+  .story-header {
+    padding: 40px 20px 24px;
+  }
+
+  .story-title {
+    font-size: 2em;
+  }
+
+  .story-content {
+    padding: 16px 20px 60px;
+  }
+
+  .bubble {
+    max-width: 88%;
+  }
+
+  .chapter-heading {
+    font-size: 1.4em;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-header h1 {
+    font-size: 1.8em;
+  }
+
+  .story-title {
+    font-size: 1.7em;
+  }
+
+  .bubble {
+    max-width: 92%;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.story_title }} — NoAnyStory</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F4D6;</text></svg>">
+</head>
+<body class="story-page">
+  <div class="site-wrapper">
+    <div class="top-bar">
+      <a href="{{ '/' | relative_url }}" class="back-link">← Back</a>
+      <span class="site-logo">NoAnyStory</span>
+    </div>
+
+    <div class="chapter-nav" id="chapterNav">
+      {% for ch in page.chapters %}
+        <a href="#{{ ch.id }}" class="chapter-pill">{{ ch.label }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="story-header">
+      <h1 class="story-title">{{ page.story_title }}</h1>
+      <div class="story-meta">
+        {% if page.genre %}<span class="tag">{{ page.genre }}</span>{% endif %}
+        {% if page.mood %}<span class="tag">{{ page.mood }}</span>{% endif %}
+        {% if page.language %}<span class="tag">{{ page.language }}</span>{% endif %}
+      </div>
+      {% if page.tagline %}<p class="story-tagline">{{ page.tagline }}</p>{% endif %}
+    </div>
+
+    <div class="story-content">
+      {{ content }}
+    </div>
+
+    <div class="site-footer">
+      <em>NoAnyStory — real stories, raw feelings.</em>
+    </div>
+  </div>
+
+  <script>
+    // Highlight active chapter pill on scroll
+    const pills = document.querySelectorAll('.chapter-pill');
+    const chapters = [];
+    pills.forEach(pill => {
+      const id = pill.getAttribute('href').substring(1);
+      const el = document.getElementById(id);
+      if (el) chapters.push({ el, pill });
+    });
+
+    function updateActive() {
+      let current = chapters[0];
+      chapters.forEach(ch => {
+        if (ch.el.getBoundingClientRect().top <= 140) current = ch;
+      });
+      pills.forEach(p => p.classList.remove('active'));
+      if (current) current.pill.classList.add('active');
+    }
+    window.addEventListener('scroll', updateActive);
+    updateActive();
+  </script>
+</body>
+</html>
