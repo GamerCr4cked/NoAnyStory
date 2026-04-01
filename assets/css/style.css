@@ -627,6 +627,55 @@ body::before {
   font-style: italic;
 }
 
+/* ---- Season Navigation ---- */
+.season-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 3em 0 1em;
+  padding-top: 2em;
+  border-top: 1px solid var(--border);
+}
+
+.season-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: var(--radius-lg);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+}
+
+.season-btn.next {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  border-color: rgba(232, 176, 89, 0.25);
+}
+
+.season-btn.next:hover {
+  background: rgba(232, 176, 89, 0.15);
+  border-color: var(--accent);
+  transform: translateX(4px);
+  box-shadow: 0 0 20px rgba(232, 176, 89, 0.1);
+  text-decoration: none;
+}
+
+.season-btn.prev {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.season-btn.prev:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  transform: translateX(-4px);
+  text-decoration: none;
+}
+
 /* ---- Footer ---- */
 .site-footer {
   text-align: center;
