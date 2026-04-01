@@ -126,8 +126,43 @@ body::before {
 }
 
 /* ============================================
-   HOME PAGE — Story Cards
+   HOME PAGE — Nav Tabs & Story Cards
    ============================================ */
+
+.nav-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-tab {
+  padding: 8px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  border-color: var(--border-light);
+}
+
+.nav-tab.active {
+  color: var(--accent);
+  background: var(--accent-subtle);
+  border-color: rgba(232, 176, 89, 0.3);
+  box-shadow: 0 0 12px rgba(232, 176, 89, 0.08);
+}
 
 .home-header {
   text-align: center;
