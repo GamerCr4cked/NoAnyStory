@@ -95,6 +95,36 @@ title: NoAnyStory
     </div>
   </a>
 
+  <a href="{{ '/stories/phir-milenge-s2' | relative_url }}" class="story-card" data-tags="drama heartbreak betrayal dark emotional">
+    <div class="card-genre">
+      <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Drama</span>
+      <span class="tag mood">Heartbreak</span>
+      <span class="tag" style="background: rgba(251, 191, 36, 0.1); color: #fbbf24; border-color: rgba(251, 191, 36, 0.15);">Betrayal</span>
+      <span class="tag" style="background: rgba(201, 160, 220, 0.1); color: #c9a0dc; border-color: rgba(201, 160, 220, 0.15);">Dark</span>
+    </div>
+    <h3>Phir Milenge — S2</h3>
+    <p class="card-desc">Distance. Silence. Ek teesra insaan. Aur wo tootna jo andar se hota hai — jab tumhara apna hi tumse door ho jaaye. Season 2 me sab bikhar jaata hai.</p>
+    <div class="card-footer">
+      <span class="card-lang">Hinglish</span>
+      <span class="read-link">Read Story →</span>
+    </div>
+  </a>
+
+  <a href="{{ '/stories/phir-milenge-s3' | relative_url }}" class="story-card" data-tags="romance emotional drama friendship slice-of-life">
+    <div class="card-genre">
+      <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Romance</span>
+      <span class="tag mood">Emotional</span>
+      <span class="tag" style="background: rgba(109, 179, 242, 0.12); color: #6db3f2; border-color: rgba(109, 179, 242, 0.15);">Friendship</span>
+      <span class="tag" style="background: rgba(201, 160, 220, 0.1); color: #c9a0dc; border-color: rgba(201, 160, 220, 0.15);">Slice-of-Life</span>
+    </div>
+    <h3>Phir Milenge — S3</h3>
+    <p class="card-desc">2 saal baad. Wahi sheher, wahi raaste. Par ab dono badal chuke hain. Kya purani zakhm bhar sakti hain? Kya dobara trust ho sakta hai? Ye season jawab deta hai.</p>
+    <div class="card-footer">
+      <span class="card-lang">Hinglish</span>
+      <span class="read-link">Read Story →</span>
+    </div>
+  </a>
+
   <div class="story-card coming-soon" data-tags="coming-soon">
     <div class="card-genre">
       <span class="tag" style="opacity:0.5">???</span>
