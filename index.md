@@ -11,10 +11,15 @@ title: NoAnyStory
 <div class="nav-tabs" id="navTabs">
   <button class="nav-tab active" data-filter="all">All Stories</button>
   <button class="nav-tab" data-filter="school-life">School Life</button>
+  <button class="nav-tab" data-filter="romance">Romance</button>
   <button class="nav-tab" data-filter="emotional">Emotional</button>
+  <button class="nav-tab" data-filter="drama">Drama</button>
+  <button class="nav-tab" data-filter="heartbreak">Heartbreak</button>
+  <button class="nav-tab" data-filter="betrayal">Betrayal</button>
   <button class="nav-tab" data-filter="comedy">Comedy</button>
   <button class="nav-tab" data-filter="slice-of-life">Slice-of-Life</button>
-  <button class="nav-tab" data-filter="romance">Romance</button>
+  <button class="nav-tab" data-filter="friendship">Friendship</button>
+  <button class="nav-tab" data-filter="dark">Dark</button>
   <button class="nav-tab" data-filter="coming-soon">Coming Soon</button>
 </div>
 
@@ -48,7 +53,7 @@ title: NoAnyStory
     </div>
   </a>
 
-  <a href="{{ '/stories/notun-pakhi-s3' | relative_url }}" class="story-card" data-tags="school-life romance slice-of-life">
+  <a href="{{ '/stories/notun-pakhi-s3' | relative_url }}" class="story-card" data-tags="school-life romance slice-of-life emotional">
     <div class="card-genre">
       <span class="tag">School Life</span>
       <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Romance</span>
@@ -62,13 +67,28 @@ title: NoAnyStory
     </div>
   </a>
 
-  <a href="{{ '/stories/the-last-message' | relative_url }}" class="story-card" data-tags="emotional drama">
+  <a href="{{ '/stories/the-last-message' | relative_url }}" class="story-card" data-tags="emotional drama heartbreak">
     <div class="card-genre">
       <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Drama</span>
       <span class="tag mood">Heartbreak</span>
     </div>
     <h3>The Last Message</h3>
     <p class="card-desc">Mr. X aur Ms. Y. Ek random chat se shuru hua, "goodnight stupid" tak pahuncha, aur phir ek din — bas silence. Na fight, na reason. Sirf "apna khayal rakhna" aur ek ending.</p>
+    <div class="card-footer">
+      <span class="card-lang">Hinglish</span>
+      <span class="read-link">Read Story →</span>
+    </div>
+  </a>
+
+  <a href="{{ '/stories/phir-milenge' | relative_url }}" class="story-card" data-tags="romance emotional heartbreak betrayal drama friendship dark slice-of-life">
+    <div class="card-genre">
+      <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Romance</span>
+      <span class="tag mood">Heartbreak</span>
+      <span class="tag" style="background: rgba(251, 191, 36, 0.1); color: #fbbf24; border-color: rgba(251, 191, 36, 0.15);">Betrayal</span>
+      <span class="tag" style="background: rgba(201, 160, 220, 0.1); color: #c9a0dc; border-color: rgba(201, 160, 220, 0.15);">Dark</span>
+    </div>
+    <h3>Phir Milenge</h3>
+    <p class="card-desc">Do best friends. Ek pyaar. Ek dhoka. Ek tootna. Aur phir — saalon baad — ek wapsi. Ye kahani tumhe hasayegi, rulayegi, gussa dilayegi, aur end me sochne pe majboor karegi.</p>
     <div class="card-footer">
       <span class="card-lang">Hinglish</span>
       <span class="read-link">Read Story →</span>
