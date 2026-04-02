@@ -46,8 +46,20 @@
     </div>
   </div>
 
+  <!-- Character Popup Modal -->
+  <div class="char-popup-overlay" id="charPopup">
+    <div class="char-popup">
+      <button class="popup-close" id="popupClose">&times;</button>
+      <div class="popup-pfp" id="popupPfp"></div>
+      <div class="popup-name" id="popupName"></div>
+      <div class="popup-role" id="popupRole"></div>
+      <div class="popup-details" id="popupDetails"></div>
+      <div class="popup-bio" id="popupBio"></div>
+    </div>
+  </div>
+
   <script>
-    // Toggle dropdown on click
+    // ---- Header Dropdown ----
     const brandLink = document.getElementById('brandLink');
     const dropdown = document.getElementById('headerDropdown');
     brandLink.addEventListener('click', function(e) {
@@ -64,7 +76,7 @@
       }
     });
 
-    // Highlight active chapter pill on scroll
+    // ---- Chapter Scroll Highlight ----
     const pills = document.querySelectorAll('.chapter-pill');
     const chapters = [];
     pills.forEach(pill => {
@@ -72,7 +84,6 @@
       const el = document.getElementById(id);
       if (el) chapters.push({ el, pill });
     });
-
     function updateActive() {
       let current = chapters[0];
       chapters.forEach(ch => {
@@ -83,6 +94,267 @@
     }
     window.addEventListener('scroll', updateActive);
     updateActive();
+
+    // ============================================
+    // CHARACTER PROFILES + PFP SYSTEM
+    // ============================================
+
+    const CHARACTER_DB = {
+      // ---- Notun Pakhi (all seasons) ----
+      'Tamim': {
+        name: 'Tamim',
+        initials: 'T',
+        role: 'Main Character',
+        color: '#6db3f2',
+        bg: 'rgba(109, 179, 242, 0.15)',
+        border: 'rgba(109, 179, 242, 0.4)',
+        details: [
+          { label: 'Nickname', value: 'UNUN / GC / GamerCracked' },
+          { label: 'Class', value: '10th → 12th' },
+          { label: 'Type', value: 'Introvert banda, awkward around her' }
+        ],
+        bio: 'Ek average ladka jisko apni feelings express karna nahi aata. Door se dekhta tha, dheere dheere karib aaya, aur ab un feelings ko samajhne ki koshish kar raha hai.'
+      },
+      'Mahiza': {
+        name: 'Mahiza',
+        initials: 'M',
+        role: 'Main Character',
+        color: '#f4a0b5',
+        bg: 'rgba(244, 160, 181, 0.15)',
+        border: 'rgba(244, 160, 181, 0.4)',
+        details: [
+          { label: 'Nickname', value: 'Notun Pakhi' },
+          { label: 'Class', value: '7th → 9th' },
+          { label: 'Type', value: 'Confident, seedhi baat, thodi shy' }
+        ],
+        bio: 'Wo ladki jise Tamim ne "Notun Pakhi" naam diya bina bataye. Pehle chhoti thi, ab badal rahi hai — confident, funny, aur uske saath comfortable.'
+      },
+      'Riya': {
+        name: 'Riya',
+        initials: 'R',
+        role: 'Mahiza\'s Best Friend',
+        color: '#48c78e',
+        bg: 'rgba(72, 199, 142, 0.15)',
+        border: 'rgba(72, 199, 142, 0.4)',
+        details: [
+          { label: 'Class', value: 'Same as Mahiza' },
+          { label: 'Type', value: 'Chulbuli, mazaak karne wali' }
+        ],
+        bio: 'Mahiza ki best friend. Hamesha mazaak udati hai, par dil se supportive. Sab kuch notice karti hai — especially Tamim aur Mahiza ke beech.'
+      },
+      'Rahul': {
+        name: 'Rahul',
+        initials: 'Ra',
+        role: 'Tamim\'s Best Friend',
+        color: '#f0a050',
+        bg: 'rgba(240, 160, 80, 0.15)',
+        border: 'rgba(240, 160, 80, 0.4)',
+        details: [
+          { label: 'Class', value: 'Same as Tamim' },
+          { label: 'Type', value: 'Loud, wingman, comedy ka stock' }
+        ],
+        bio: 'Tamim ka close dost. Hamesha usse push karta hai Mahiza se baat karne ke liye. Khud ki love life zero, par doosron ki love life me expert.'
+      },
+
+      // ---- The Last Message ----
+      'Mr. X': {
+        name: 'Mr. X',
+        initials: '?',
+        role: 'Main Character',
+        color: '#6db3f2',
+        bg: 'rgba(109, 179, 242, 0.15)',
+        border: 'rgba(109, 179, 242, 0.4)',
+        unknown: true,
+        details: [
+          { label: 'Identity', value: 'Unknown' },
+          { label: 'Type', value: 'Silence se darta hai, overthink karta hai' }
+        ],
+        bio: 'Wo ladka jo silence se darta tha. Jisko laga tha ki kuch cheezein hamesha rahti hain — par galat tha.'
+      },
+      'Ms. Y': {
+        name: 'Ms. Y',
+        initials: '?',
+        role: 'Main Character',
+        color: '#f4a0b5',
+        bg: 'rgba(244, 160, 181, 0.15)',
+        border: 'rgba(244, 160, 181, 0.4)',
+        unknown: true,
+        details: [
+          { label: 'Identity', value: 'Unknown' },
+          { label: 'Type', value: 'Caring par guarded, apni problems chupati hai' }
+        ],
+        bio: 'Wo ladki jo sab kuch chhupake rakhti thi. Care karti thi, par khud ke baare me kabhi nahi bolti thi. Ek din chali gayi — bina reason diye.'
+      },
+
+      // ---- Phir Milenge (all seasons) ----
+      'Arhan': {
+        name: 'Arhan',
+        initials: 'A',
+        role: 'Main Character',
+        color: '#6db3f2',
+        bg: 'rgba(109, 179, 242, 0.15)',
+        border: 'rgba(109, 179, 242, 0.4)',
+        details: [
+          { label: 'Age', value: '18 → 22' },
+          { label: 'College', value: 'BSc Student' },
+          { label: 'Passion', value: 'Photography' },
+          { label: 'Type', value: 'Introvert, loyal, sochta bohot hai' }
+        ],
+        bio: 'Ek introvert ladka jo college me pehli baar kisi se itna connected hua. Photography uska sahara hai — jab sab bikhar gaya, camera ne sambhala.'
+      },
+      'Inaya': {
+        name: 'Inaya',
+        initials: 'I',
+        role: 'Main Character',
+        color: '#f4a0b5',
+        bg: 'rgba(244, 160, 181, 0.15)',
+        border: 'rgba(244, 160, 181, 0.4)',
+        details: [
+          { label: 'Age', value: '18 → 22' },
+          { label: 'College', value: 'BSc Student' },
+          { label: 'Passion', value: 'Writing' },
+          { label: 'Type', value: 'Extrovert, emotional, seedhi baat' }
+        ],
+        bio: 'Wo ladki jo Arhan ki zindagi me aayi jaise koi storm aata hai — achanak, tez, aur sab kuch badal ke. Galtiyan ki, par dil sachcha tha.'
+      },
+      'Vikram': {
+        name: 'Vikram',
+        initials: 'V',
+        role: 'Arhan\'s Best Friend',
+        color: '#48c78e',
+        bg: 'rgba(72, 199, 142, 0.15)',
+        border: 'rgba(72, 199, 142, 0.4)',
+        details: [
+          { label: 'College', value: 'Same as Arhan' },
+          { label: 'Type', value: 'Loyal dost, practical advice deta hai' }
+        ],
+        bio: 'Arhan ka roommate aur best friend. Jab sab ne side chhod di, Vikram khada raha. Practical hai, par jab zarurat hoti hai — emotional bhi ho jaata hai.'
+      },
+      'Meera': {
+        name: 'Meera',
+        initials: 'Me',
+        role: 'Inaya\'s Friend',
+        color: '#a78bfa',
+        bg: 'rgba(167, 139, 250, 0.15)',
+        border: 'rgba(167, 139, 250, 0.4)',
+        details: [
+          { label: 'College', value: 'Same batch' },
+          { label: 'Type', value: 'Sweet, supportive, thodi gossip queen' }
+        ],
+        bio: 'Inaya ki college friend. Dono ke breakup ke baad bhi neutral rahi — dono ki baat sunti thi bina judge kiye.'
+      },
+      'Kabir': {
+        name: 'Kabir',
+        initials: 'K',
+        role: 'The Third Person',
+        color: '#fbbf24',
+        bg: 'rgba(251, 191, 36, 0.15)',
+        border: 'rgba(251, 191, 36, 0.4)',
+        details: [
+          { label: 'College', value: 'Senior' },
+          { label: 'Type', value: 'Charming, manipulative' }
+        ],
+        bio: 'Wo senior jo beech me aaya. Charming tha, caring dikha — par intentions clear nahi the. Inaya ko confused kiya jab Arhan door tha.'
+      }
+    };
+
+    // ---- Auto-inject PFPs into dialogues ----
+    document.querySelectorAll('.dialogue').forEach(dlg => {
+      const speakerEl = dlg.querySelector('.speaker');
+      const bubbleEl = dlg.querySelector('.bubble');
+      if (!speakerEl || !bubbleEl) return;
+
+      const name = speakerEl.textContent.trim();
+      const char = CHARACTER_DB[name];
+
+      // Create PFP
+      const pfp = document.createElement('div');
+      pfp.className = 'pfp';
+      pfp.setAttribute('data-character', name);
+
+      if (char) {
+        if (char.unknown) {
+          pfp.classList.add('unknown');
+          pfp.style.borderColor = char.border;
+          pfp.textContent = '';
+        } else {
+          pfp.textContent = char.initials;
+          pfp.style.borderColor = char.border;
+          pfp.style.color = char.color;
+          pfp.style.background = char.bg;
+        }
+      } else {
+        pfp.classList.add('unknown');
+      }
+
+      // Wrap bubble in msg-row with pfp
+      const msgRow = document.createElement('div');
+      msgRow.className = 'msg-row';
+
+      bubbleEl.parentNode.insertBefore(msgRow, bubbleEl);
+      msgRow.appendChild(pfp);
+      msgRow.appendChild(bubbleEl);
+
+      // Click PFP → show popup
+      pfp.addEventListener('click', () => showCharPopup(name));
+    });
+
+    // ---- Popup Logic ----
+    const popupOverlay = document.getElementById('charPopup');
+    const popupClose = document.getElementById('popupClose');
+
+    function showCharPopup(name) {
+      const char = CHARACTER_DB[name];
+      if (!char) return;
+
+      const pfpEl = document.getElementById('popupPfp');
+      const nameEl = document.getElementById('popupName');
+      const roleEl = document.getElementById('popupRole');
+      const detailsEl = document.getElementById('popupDetails');
+      const bioEl = document.getElementById('popupBio');
+
+      // PFP
+      if (char.unknown) {
+        pfpEl.textContent = '?';
+        pfpEl.style.background = char.bg;
+        pfpEl.style.color = char.color;
+        pfpEl.style.border = '3px solid ' + char.border;
+      } else {
+        pfpEl.textContent = char.initials;
+        pfpEl.style.background = char.bg;
+        pfpEl.style.color = char.color;
+        pfpEl.style.border = '3px solid ' + char.border;
+      }
+
+      // Name & Role
+      nameEl.textContent = char.name;
+      nameEl.style.color = char.color;
+      roleEl.textContent = char.role;
+      roleEl.style.color = char.color;
+
+      // Details
+      detailsEl.innerHTML = '';
+      if (char.details) {
+        char.details.forEach(d => {
+          detailsEl.innerHTML += `<div class="popup-detail"><span class="detail-label">${d.label}</span><span class="detail-value">${d.value}</span></div>`;
+        });
+      }
+
+      // Bio
+      bioEl.textContent = char.bio || '';
+
+      popupOverlay.classList.add('active');
+    }
+
+    popupClose.addEventListener('click', () => {
+      popupOverlay.classList.remove('active');
+    });
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) popupOverlay.classList.remove('active');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') popupOverlay.classList.remove('active');
+    });
   </script>
 </body>
 </html>
