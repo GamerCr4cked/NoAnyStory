@@ -34,7 +34,7 @@ title: NoAnyStory
     </div>
   </a>
 
-  <a href="{{ '/stories/notun-pakhi-s2' | relative_url }}" class="story-card" data-tags="school-life comedy">
+  <a href="{{ '/stories/notun-pakhi-s2' | relative_url }}" class="story-card" data-tags="school-life comedy slice-of-life">
     <div class="card-genre">
       <span class="tag">School Life</span>
       <span class="tag mood" style="background: rgba(109, 179, 242, 0.12); color: #6db3f2; border-color: rgba(109, 179, 242, 0.15);">Comedy</span>
@@ -50,7 +50,7 @@ title: NoAnyStory
 
   <a href="{{ '/stories/notun-pakhi-s3' | relative_url }}" class="story-card" data-tags="school-life romance slice-of-life">
     <div class="card-genre">
-      <span class="tag">College-School Life</span>
+      <span class="tag">School Life</span>
       <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Romance</span>
       <span class="tag" style="background: rgba(201, 160, 220, 0.1); color: #c9a0dc; border-color: rgba(201, 160, 220, 0.15);">Slice-of-Life</span>
     </div>
