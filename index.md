@@ -62,6 +62,19 @@ title: NoAnyStory
     </div>
   </a>
 
+  <a href="{{ '/stories/the-last-message' | relative_url }}" class="story-card" data-tags="emotional drama">
+    <div class="card-genre">
+      <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Drama</span>
+      <span class="tag mood">Heartbreak</span>
+    </div>
+    <h3>The Last Message</h3>
+    <p class="card-desc">Mr. X aur Ms. Y. Ek random chat se shuru hua, "goodnight stupid" tak pahuncha, aur phir ek din — bas silence. Na fight, na reason. Sirf "apna khayal rakhna" aur ek ending.</p>
+    <div class="card-footer">
+      <span class="card-lang">Hinglish</span>
+      <span class="read-link">Read Story →</span>
+    </div>
+  </a>
+
   <div class="story-card coming-soon" data-tags="coming-soon">
     <div class="card-genre">
       <span class="tag" style="opacity:0.5">???</span>
