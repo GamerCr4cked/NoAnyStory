@@ -1,6 +1,6 @@
-title: NoAnyStory
-description: "A collection of stories — real, raw, and unfiltered."
-baseurl: "/NoAnyStory"
+title: NotAnArtical
+description: "It looks real. It's not. And that's what hits different."
+baseurl: "/NotAnArtical"
 url: "https://gamercr4cked.github.io"
 markdown: kramdown
 kramdown:

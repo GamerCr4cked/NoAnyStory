@@ -1,5 +1,5 @@
 /* ============================================
-   NoAnyStory — Dark Warm Theme
+   NotAnArtical — Dark Warm Theme
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -74,45 +74,89 @@ body::before {
   flex-direction: column;
 }
 
-/* ---- Top Bar ---- */
-.top-bar {
+/* ============================================
+   STICKY HEADER + DROPDOWN
+   ============================================ */
+.site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(10, 14, 20, 0.8);
+  z-index: 200;
+  background: rgba(10, 14, 20, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  padding: 16px 40px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+  padding: 16px 40px;
+  height: 60px;
 }
 
-.site-logo {
+.header-brand {
+  position: relative;
+  display: inline-block;
+}
+
+.header-brand .brand-link {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--accent);
   text-decoration: none;
   letter-spacing: 0.5px;
   transition: color 0.2s;
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 16px;
+  display: block;
 }
 
-.site-logo:hover {
+.header-brand .brand-link:hover {
   color: var(--accent-hover);
-  text-decoration: none;
 }
 
-.back-link {
-  color: var(--text-secondary);
-  text-decoration: none;
+/* Dropdown */
+.header-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  min-width: 180px;
+  padding: 8px 0;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  transform: translateX(-50%) translateY(10px);
+}
+
+/* Show on hover OR when .open class is added (click) */
+.header-brand:hover .header-dropdown,
+.header-brand .header-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.header-dropdown a {
+  display: block;
+  padding: 10px 24px;
   font-size: 14px;
   font-weight: 500;
-  transition: color 0.2s;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.15s ease;
 }
 
-.back-link:hover {
+.header-dropdown a:hover {
+  color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.header-dropdown a.active-page {
   color: var(--accent);
 }
 
@@ -126,7 +170,121 @@ body::before {
 }
 
 /* ============================================
-   HOME PAGE — Nav Tabs & Story Cards
+   HOME PAGE — Landing
+   ============================================ */
+.home-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.home-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.home-header h1 span {
+  color: var(--accent);
+}
+
+.home-header p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Category Cards on Home */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.category-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 40px 32px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--dialogue-her));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.category-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-light);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+.category-card .cat-icon {
+  font-size: 2.5em;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.category-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.category-card .cat-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.category-card .cat-count {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: var(--accent-subtle);
+  border: 1px solid rgba(232, 176, 89, 0.15);
+}
+
+.category-card.coming-soon-card {
+  opacity: 0.6;
+}
+
+.category-card.coming-soon-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ============================================
+   STORIES PAGE — Nav Tabs & Story Cards
    ============================================ */
 
 .nav-tabs {
@@ -162,32 +320,6 @@ body::before {
   background: var(--accent-subtle);
   border-color: rgba(232, 176, 89, 0.3);
   box-shadow: 0 0 12px rgba(232, 176, 89, 0.08);
-}
-
-.home-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.home-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-  letter-spacing: -0.5px;
-}
-
-.home-header h1 span {
-  color: var(--accent);
-}
-
-.home-header p {
-  font-size: 16px;
-  color: var(--text-secondary);
-  max-width: 480px;
-  margin: 0 auto;
-  line-height: 1.6;
 }
 
 .stories-grid {
@@ -232,8 +364,9 @@ body::before {
 }
 
 .story-card .card-genre {
-  display: inline-flex;
-  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-bottom: 16px;
 }
 
@@ -315,7 +448,7 @@ body::before {
 /* Chapter Navigation */
 .chapter-nav {
   position: sticky;
-  top: 57px;
+  top: 60px;
   z-index: 90;
   background: rgba(10, 14, 20, 0.85);
   backdrop-filter: blur(20px);
@@ -700,8 +833,14 @@ body::before {
 
 /* ---- Mobile ---- */
 @media (max-width: 768px) {
-  .top-bar {
+  .site-header {
     padding: 14px 20px;
+    height: 52px;
+  }
+
+  .header-brand .brand-link {
+    font-size: 18px;
+    padding: 6px 12px;
   }
 
   .content-area {
@@ -710,6 +849,11 @@ body::before {
 
   .home-header h1 {
     font-size: 2.2em;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .stories-grid {
@@ -724,6 +868,7 @@ body::before {
   .chapter-nav {
     padding: 10px 16px;
     gap: 6px;
+    top: 52px;
   }
 
   .chapter-pill {

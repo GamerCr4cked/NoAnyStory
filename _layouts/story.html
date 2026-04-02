@@ -3,17 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.story_title }} — NoAnyStory</title>
+  <title>{{ page.story_title }} — NotAnArtical</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F4D6;</text></svg>">
 </head>
 <body class="story-page">
   <div class="site-wrapper">
-    <div class="top-bar">
-      <a href="{{ '/' | relative_url }}" class="back-link">← Back</a>
-      <span class="site-logo">NoAnyStory</span>
-    </div>
+    <header class="site-header">
+      <div class="header-brand">
+        <a href="{{ '/' | relative_url }}" class="brand-link" id="brandLink">NotAnArtical</a>
+        <div class="header-dropdown" id="headerDropdown">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/stories' | relative_url }}">Stories</a>
+          <a href="{{ '/coming-soon' | relative_url }}">Coming Soon</a>
+        </div>
+      </div>
+    </header>
 
     <div class="chapter-nav" id="chapterNav">
       {% for ch in page.chapters %}
@@ -36,11 +42,28 @@
     </div>
 
     <div class="site-footer">
-      <em>NoAnyStory — scripted stories, real feelings.</em>
+      <em>NotAnArtical — it looks real. It's not.</em>
     </div>
   </div>
 
   <script>
+    // Toggle dropdown on click
+    const brandLink = document.getElementById('brandLink');
+    const dropdown = document.getElementById('headerDropdown');
+    brandLink.addEventListener('click', function(e) {
+      if (dropdown.classList.contains('open')) {
+        dropdown.classList.remove('open');
+      } else {
+        e.preventDefault();
+        dropdown.classList.add('open');
+      }
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.header-brand')) {
+        dropdown.classList.remove('open');
+      }
+    });
+
     // Highlight active chapter pill on scroll
     const pills = document.querySelectorAll('.chapter-pill');
     const chapters = [];

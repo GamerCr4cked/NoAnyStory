@@ -10,17 +10,44 @@
 </head>
 <body>
   <div class="site-wrapper">
-    <div class="top-bar">
-      <a href="{{ '/' | relative_url }}" class="site-logo">NoAnyStory</a>
-    </div>
+    <header class="site-header">
+      <div class="header-brand">
+        <a href="{{ '/' | relative_url }}" class="brand-link" id="brandLink">NotAnArtical</a>
+        <div class="header-dropdown" id="headerDropdown">
+          <a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url == '/index.html' %}class="active-page"{% endif %}>Home</a>
+          <a href="{{ '/stories' | relative_url }}" {% if page.url == '/stories.html' or page.url == '/stories/' %}class="active-page"{% endif %}>Stories</a>
+          <a href="{{ '/coming-soon' | relative_url }}" {% if page.url == '/coming-soon.html' or page.url == '/coming-soon/' %}class="active-page"{% endif %}>Coming Soon</a>
+        </div>
+      </div>
+    </header>
 
     <div class="content-area">
       {{ content }}
     </div>
 
     <div class="site-footer">
-      <em>NoAnyStory — scripted stories, real feelings.</em>
+      <em>NotAnArtical — it looks real. It's not.</em>
     </div>
   </div>
+
+  <script>
+    // Toggle dropdown on click too
+    const brandLink = document.getElementById('brandLink');
+    const dropdown = document.getElementById('headerDropdown');
+    brandLink.addEventListener('click', function(e) {
+      if (dropdown.classList.contains('open')) {
+        dropdown.classList.remove('open');
+      } else {
+        e.preventDefault();
+        dropdown.classList.add('open');
+      }
+    });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.header-brand')) {
+        dropdown.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>
