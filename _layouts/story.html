@@ -67,6 +67,14 @@
     </div>
   </div>
 
+  <!-- Progress Dots (side nav) -->
+  <div class="progress-dots" id="progressDots"></div>
+
+  <!-- Keyboard Hint -->
+  <div class="keyboard-hint">
+    <kbd>←</kbd> <kbd>→</kbd> chapters &nbsp; <kbd>Esc</kbd> home
+  </div>
+
   <!-- Character Popup Modal -->
   <div class="char-popup-overlay" id="charPopup">
     <div class="char-popup">
@@ -541,6 +549,123 @@
         btn.innerHTML = '<span class="copied-msg">✓ Copied!</span>';
         setTimeout(function() { btn.innerHTML = '🔗 Copy Link'; }, 2000);
       });
+    });
+
+    // ============================================
+    // CHAPTER PROGRESS DOTS
+    // ============================================
+    const dotsContainer = document.getElementById('progressDots');
+    const allChapters = [];
+    pills.forEach(pill => {
+      const id = pill.getAttribute('href').substring(1);
+      const el = document.getElementById(id);
+      if (el) {
+        const dot = document.createElement('div');
+        dot.className = 'progress-dot';
+        dot.setAttribute('data-label', pill.textContent);
+        dot.addEventListener('click', () => {
+          el.scrollIntoView({ behavior: 'smooth' });
+        });
+        dotsContainer.appendChild(dot);
+        allChapters.push({ el, dot, pill });
+      }
+    });
+
+    function updateDots() {
+      let currentIdx = 0;
+      allChapters.forEach((ch, i) => {
+        if (ch.el.getBoundingClientRect().top <= 160) currentIdx = i;
+      });
+      allChapters.forEach((ch, i) => {
+        ch.dot.classList.remove('read', 'current');
+        if (i < currentIdx) ch.dot.classList.add('read');
+        if (i === currentIdx) ch.dot.classList.add('current');
+      });
+    }
+    window.addEventListener('scroll', updateDots);
+    updateDots();
+
+    // ============================================
+    // BOOKMARK / CONTINUE READING
+    // ============================================
+    const storyKey = 'bookmark_' + window.location.pathname;
+
+    // Save current chapter on scroll
+    function saveBookmark() {
+      let currentChId = '';
+      allChapters.forEach(ch => {
+        if (ch.el.getBoundingClientRect().top <= 160) {
+          currentChId = ch.el.id;
+        }
+      });
+      if (currentChId) {
+        localStorage.setItem(storyKey, currentChId);
+      }
+    }
+    let bookmarkTimer;
+    window.addEventListener('scroll', function() {
+      clearTimeout(bookmarkTimer);
+      bookmarkTimer = setTimeout(saveBookmark, 500);
+    });
+
+    // Show continue banner on load
+    const savedChapter = localStorage.getItem(storyKey);
+    if (savedChapter && savedChapter !== allChapters[0]?.el.id) {
+      const savedEl = document.getElementById(savedChapter);
+      if (savedEl) {
+        const chLabel = allChapters.find(c => c.el.id === savedChapter)?.pill.textContent || savedChapter;
+        const banner = document.createElement('div');
+        banner.className = 'bookmark-banner';
+        banner.innerHTML = '<span>Continue from <strong>' + chLabel + '</strong>?</span>' +
+          '<button class="bookmark-btn continue" id="bmContinue">Continue</button>' +
+          '<button class="bookmark-btn dismiss" id="bmDismiss">✕</button>';
+        document.body.appendChild(banner);
+
+        document.getElementById('bmContinue').addEventListener('click', function() {
+          savedEl.scrollIntoView({ behavior: 'smooth' });
+          banner.remove();
+        });
+        document.getElementById('bmDismiss').addEventListener('click', function() {
+          banner.remove();
+        });
+        // Auto-dismiss after 8 seconds
+        setTimeout(function() { if (banner.parentNode) banner.remove(); }, 8000);
+      }
+    }
+
+    // ============================================
+    // KEYBOARD NAVIGATION
+    // ============================================
+    document.addEventListener('keydown', function(e) {
+      // Don't capture if typing in input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        // Next chapter
+        let currentIdx = 0;
+        allChapters.forEach((ch, i) => {
+          if (ch.el.getBoundingClientRect().top <= 160) currentIdx = i;
+        });
+        if (currentIdx < allChapters.length - 1) {
+          e.preventDefault();
+          allChapters[currentIdx + 1].el.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        // Prev chapter
+        let currentIdx = 0;
+        allChapters.forEach((ch, i) => {
+          if (ch.el.getBoundingClientRect().top <= 160) currentIdx = i;
+        });
+        if (currentIdx > 0) {
+          e.preventDefault();
+          allChapters[currentIdx - 1].el.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (e.key === 'Escape') {
+        // Go home (if popup not open)
+        if (!popupOverlay.classList.contains('active')) {
+          window.location.href = '{{ "/" | relative_url }}';
+        }
+      }
     });
   </script>
 </body>
