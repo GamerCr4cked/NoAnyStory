@@ -634,6 +634,31 @@
     }
 
     // ============================================
+    // COPY QUOTE (inject into bubbles)
+    // ============================================
+    document.querySelectorAll('.bubble').forEach(function(bubble) {
+      const btn = document.createElement('button');
+      btn.className = 'quote-copy-btn';
+      btn.textContent = '📋';
+      btn.title = 'Copy quote';
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const speaker = bubble.closest('.dialogue')?.querySelector('.speaker')?.textContent.trim() || '';
+        const text = bubble.textContent.replace(btn.textContent, '').trim();
+        const quote = speaker ? '"' + text + '" — ' + speaker : '"' + text + '"';
+        navigator.clipboard.writeText(quote).then(function() {
+          btn.textContent = '✓';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = '📋';
+            btn.classList.remove('copied');
+          }, 1500);
+        });
+      });
+      bubble.appendChild(btn);
+    });
+
+    // ============================================
     // KEYBOARD NAVIGATION
     // ============================================
     document.addEventListener('keydown', function(e) {

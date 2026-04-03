@@ -8,6 +8,25 @@ title: Stories — NotAnArtical
   <p>It looks real. It's not. And that's what hits different.</p>
 </div>
 
+<button class="search-trigger" id="searchTrigger">
+  🔍 Search stories...
+  <kbd>Ctrl+K</kbd>
+</button>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search story names, descriptions..." autocomplete="off">
+      <button class="search-close" id="searchClose">Esc</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <div class="search-hint">Type to search across all stories</div>
+    </div>
+  </div>
+</div>
+
 <div class="nav-tabs" id="navTabs">
   <button class="nav-tab active" data-filter="all">All Stories</button>
   <button class="nav-tab" data-filter="school-life">School Life</button>
@@ -162,6 +181,7 @@ title: Stories — NotAnArtical
 </div>
 
 <script>
+  // ---- Tag Filter ----
   document.querySelectorAll('.nav-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -175,5 +195,92 @@ title: Stories — NotAnArtical
         }
       });
     });
+  });
+
+  // ---- Search ----
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+
+  // Build search index from story cards
+  const searchIndex = [];
+  document.querySelectorAll('.story-card:not(.coming-soon)').forEach(card => {
+    searchIndex.push({
+      title: card.querySelector('h3')?.textContent || '',
+      desc: card.querySelector('.card-desc')?.textContent || '',
+      tags: card.dataset.tags || '',
+      url: card.href || ''
+    });
+  });
+
+  function openSearch() {
+    searchOverlay.classList.add('active');
+    searchInput.value = '';
+    searchInput.focus();
+    searchResults.innerHTML = '<div class="search-hint">Type to search across all stories</div>';
+  }
+
+  function closeSearch() {
+    searchOverlay.classList.remove('active');
+  }
+
+  function doSearch(query) {
+    if (!query.trim()) {
+      searchResults.innerHTML = '<div class="search-hint">Type to search across all stories</div>';
+      return;
+    }
+    const q = query.toLowerCase();
+    const matches = searchIndex.filter(s =>
+      s.title.toLowerCase().includes(q) ||
+      s.desc.toLowerCase().includes(q) ||
+      s.tags.toLowerCase().includes(q)
+    );
+
+    if (matches.length === 0) {
+      searchResults.innerHTML = '<div class="search-no-result">No stories found for "' + query + '"</div>';
+      return;
+    }
+
+    searchResults.innerHTML = matches.map(s => {
+      // Find matching snippet
+      let snippet = s.desc;
+      const idx = snippet.toLowerCase().indexOf(q);
+      if (idx !== -1) {
+        const start = Math.max(0, idx - 30);
+        const end = Math.min(snippet.length, idx + q.length + 50);
+        snippet = (start > 0 ? '...' : '') +
+          snippet.substring(start, idx) +
+          '<mark>' + snippet.substring(idx, idx + q.length) + '</mark>' +
+          snippet.substring(idx + q.length, end) +
+          (end < snippet.length ? '...' : '');
+      } else if (s.title.toLowerCase().includes(q)) {
+        const ti = s.title.toLowerCase().indexOf(q);
+        snippet = s.title.substring(0, ti) +
+          '<mark>' + s.title.substring(ti, ti + q.length) + '</mark>' +
+          s.title.substring(ti + q.length);
+      }
+      return '<a href="' + s.url + '" class="search-result">' +
+        '<div class="result-title">' + s.title + '</div>' +
+        '<div class="result-match">' + snippet + '</div>' +
+        '</a>';
+    }).join('');
+  }
+
+  document.getElementById('searchTrigger').addEventListener('click', openSearch);
+  document.getElementById('searchClose').addEventListener('click', closeSearch);
+  searchOverlay.addEventListener('click', function(e) {
+    if (e.target === searchOverlay) closeSearch();
+  });
+  searchInput.addEventListener('input', function() { doSearch(this.value); });
+
+  // Ctrl+K to open, Esc to close
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+    if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
+      closeSearch();
+    }
   });
 </script>
