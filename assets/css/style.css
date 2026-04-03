@@ -32,7 +32,64 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
+  --story-font-size: 15px;
 }
+
+/* ============================================
+   LIGHT THEME
+   ============================================ */
+[data-theme="light"] {
+  --bg-primary: #f5f3ef;
+  --bg-secondary: #eae7e1;
+  --bg-card: #ffffff;
+  --bg-card-hover: #faf8f5;
+  --bg-bubble-her: rgba(244, 160, 181, 0.12);
+  --bg-bubble-him: rgba(88, 166, 255, 0.1);
+  --border: #e0dbd3;
+  --border-light: #d4cfc6;
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --accent: #c4922e;
+  --accent-hover: #a87a1f;
+  --accent-subtle: rgba(196, 146, 46, 0.08);
+  --accent-glow: rgba(196, 146, 46, 0.15);
+  --dialogue-her: #c4728a;
+  --dialogue-her-dark: rgba(196, 114, 138, 0.12);
+  --dialogue-him: #3a7fcc;
+  --dialogue-him-dark: rgba(58, 127, 204, 0.1);
+  --highlight: #8b5fb0;
+  --divider: linear-gradient(90deg, transparent, var(--border-light) 20%, var(--border-light) 80%, transparent);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.1);
+}
+
+[data-theme="light"] body::before {
+  background: radial-gradient(ellipse at 50% 0%, rgba(196, 146, 46, 0.04) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(196, 114, 138, 0.03) 0%, transparent 50%);
+}
+
+[data-theme="light"] .site-header {
+  background: rgba(245, 243, 239, 0.9);
+}
+
+[data-theme="light"] .chapter-nav {
+  background: rgba(245, 243, 239, 0.9);
+}
+
+[data-theme="light"] .story-divider.major::after {
+  background: var(--bg-primary);
+}
+
+[data-theme="light"] .dialogue.friend1 .speaker { color: #2e8b63; }
+[data-theme="light"] .dialogue.friend1 .bubble { background: rgba(46, 139, 99, 0.08); border-color: rgba(46, 139, 99, 0.15); color: #2e8b63; }
+[data-theme="light"] .dialogue.friend2 .speaker { color: #c07830; }
+[data-theme="light"] .dialogue.friend2 .bubble { background: rgba(192, 120, 48, 0.08); border-color: rgba(192, 120, 48, 0.15); color: #c07830; }
+[data-theme="light"] .dialogue.friend3 .speaker { color: #7c5cbf; }
+[data-theme="light"] .dialogue.friend3 .bubble { background: rgba(124, 92, 191, 0.08); border-color: rgba(124, 92, 191, 0.15); color: #7c5cbf; }
+[data-theme="light"] .dialogue.friend4 .speaker { color: #b08a10; }
+[data-theme="light"] .dialogue.friend4 .bubble { background: rgba(176, 138, 16, 0.08); border-color: rgba(176, 138, 16, 0.15); color: #b08a10; }
 
 * {
   margin: 0;
@@ -541,6 +598,7 @@ body::before {
   max-width: 680px;
   margin: 0 auto;
   padding: 20px 40px 80px;
+  font-size: var(--story-font-size);
 }
 
 /* Chapter headings */
@@ -563,7 +621,7 @@ body::before {
 .story-content p {
   margin-bottom: 1em;
   color: var(--text-secondary);
-  font-size: 15px;
+  font-size: inherit;
   line-height: 1.8;
 }
 
@@ -681,7 +739,7 @@ body::before {
 .bubble {
   max-width: 75%;
   padding: 14px 20px;
-  font-size: 15px;
+  font-size: inherit;
   line-height: 1.6;
   position: relative;
   animation: bubbleFadeIn 0.3s ease;
@@ -1059,6 +1117,161 @@ body::before {
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
+/* ============================================
+   THEME TOGGLE BUTTON
+   ============================================ */
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 20px;
+  z-index: 250;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+/* ============================================
+   STORY CONTROLS BAR (Font Size)
+   ============================================ */
+.story-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 40px;
+  background: rgba(10, 14, 20, 0.6);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-theme="light"] .story-controls {
+  background: rgba(245, 243, 239, 0.6);
+}
+
+.font-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.font-control span {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.font-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.font-btn:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ============================================
+   SHARE BUTTONS
+   ============================================ */
+.share-section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 40px 20px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.share-section p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-family: 'Inter', sans-serif;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.share-btn.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: rgba(37, 211, 102, 0.3);
+  color: #25d366;
+}
+
+.share-btn.twitter:hover {
+  background: rgba(29, 161, 242, 0.1);
+  border-color: rgba(29, 161, 242, 0.3);
+  color: #1da1f2;
+}
+
+.share-btn.copy:hover {
+  background: var(--accent-subtle);
+  border-color: rgba(232, 176, 89, 0.3);
+  color: var(--accent);
+}
+
+.share-btn .copied-msg {
+  color: #48c78e;
+  font-weight: 600;
+}
+
 /* ---- Mobile ---- */
 @media (max-width: 768px) {
   .site-header {
@@ -1091,6 +1304,22 @@ body::before {
 
   .story-card {
     padding: 24px 20px;
+  }
+
+  .theme-toggle {
+    top: 10px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .story-controls {
+    padding: 6px 16px;
+  }
+
+  .share-section {
+    padding: 30px 20px 16px;
   }
 
   .chapter-nav {

@@ -8,7 +8,12 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F4D6;</text></svg>">
 </head>
+<script>
+  // Restore theme before render to prevent flash
+  (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+</script>
 <body>
+  <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
   <div class="site-wrapper">
     <header class="site-header">
       <div class="header-brand">
@@ -47,6 +52,25 @@
       if (!e.target.closest('.header-brand')) {
         dropdown.classList.remove('open');
       }
+    });
+
+    // ---- Theme Toggle ----
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleIcon() {
+      themeToggle.textContent = document.documentElement.getAttribute('data-theme') === 'light' ? '☀️' : '🌙';
+    }
+    updateToggleIcon();
+    themeToggle.addEventListener('click', function() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      if (next === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.removeItem('theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      }
+      updateToggleIcon();
     });
   </script>
 </body>

@@ -8,7 +8,11 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F4D6;</text></svg>">
 </head>
+<script>
+  (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var f=localStorage.getItem('fontSize');if(f)document.documentElement.style.setProperty('--story-font-size',f+'px');})();
+</script>
 <body class="story-page">
+  <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
   <div class="site-wrapper">
     <header class="site-header">
       <div class="header-brand">
@@ -27,6 +31,14 @@
       {% endfor %}
     </div>
 
+    <div class="story-controls">
+      <div class="font-control">
+        <span>Font</span>
+        <button class="font-btn" id="fontMinus" title="Decrease font size">A-</button>
+        <button class="font-btn" id="fontPlus" title="Increase font size">A+</button>
+      </div>
+    </div>
+
     <div class="story-header">
       <h1 class="story-title">{{ page.story_title }}</h1>
       <div class="story-meta">
@@ -39,6 +51,15 @@
 
     <div class="story-content">
       {{ content }}
+    </div>
+
+    <div class="share-section">
+      <p>Share this story</p>
+      <div class="share-buttons">
+        <a class="share-btn whatsapp" id="shareWhatsapp" target="_blank" rel="noopener">📱 WhatsApp</a>
+        <a class="share-btn twitter" id="shareTwitter" target="_blank" rel="noopener">🐦 Twitter</a>
+        <button class="share-btn copy" id="shareCopy">🔗 Copy Link</button>
+      </div>
     </div>
 
     <div class="site-footer">
@@ -464,6 +485,62 @@
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') popupOverlay.classList.remove('active');
+    });
+
+    // ============================================
+    // THEME TOGGLE
+    // ============================================
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleIcon() {
+      themeToggle.textContent = document.documentElement.getAttribute('data-theme') === 'light' ? '☀️' : '🌙';
+    }
+    updateToggleIcon();
+    themeToggle.addEventListener('click', function() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      if (next === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.removeItem('theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      }
+      updateToggleIcon();
+    });
+
+    // ============================================
+    // FONT SIZE CONTROL
+    // ============================================
+    let fontSize = parseInt(localStorage.getItem('fontSize')) || 15;
+    function applyFontSize() {
+      document.documentElement.style.setProperty('--story-font-size', fontSize + 'px');
+      localStorage.setItem('fontSize', fontSize);
+    }
+    document.getElementById('fontPlus').addEventListener('click', function() {
+      if (fontSize < 24) { fontSize += 2; applyFontSize(); }
+    });
+    document.getElementById('fontMinus').addEventListener('click', function() {
+      if (fontSize > 12) { fontSize -= 2; applyFontSize(); }
+    });
+
+    // ============================================
+    // SHARE BUTTONS
+    // ============================================
+    const storyTitle = '{{ page.story_title }} — NotAnArtical';
+    const storyUrl = window.location.href;
+
+    document.getElementById('shareWhatsapp').href =
+      'https://wa.me/?text=' + encodeURIComponent(storyTitle + '\n' + storyUrl);
+
+    document.getElementById('shareTwitter').href =
+      'https://twitter.com/intent/tweet?text=' + encodeURIComponent(storyTitle) + '&url=' + encodeURIComponent(storyUrl);
+
+    document.getElementById('shareCopy').addEventListener('click', function() {
+      const btn = this;
+      navigator.clipboard.writeText(storyUrl).then(function() {
+        btn.innerHTML = '<span class="copied-msg">✓ Copied!</span>';
+        setTimeout(function() { btn.innerHTML = '🔗 Copy Link'; }, 2000);
+      });
     });
   </script>
 </body>
