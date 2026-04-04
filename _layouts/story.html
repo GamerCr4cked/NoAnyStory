@@ -37,7 +37,28 @@
         <button class="font-btn" id="fontMinus" title="Decrease font size">A-</button>
         <button class="font-btn" id="fontPlus" title="Increase font size">A+</button>
       </div>
+      {% if page.translations %}
+      <button class="translate-btn" id="translateBtn" title="Translate">🌐 Translate</button>
+      {% endif %}
     </div>
+
+    <!-- Translation Modal -->
+    {% if page.translations %}
+    <div class="translate-modal" id="translateModal">
+      <div class="translate-modal-content">
+        <h3>🌐 Select Language</h3>
+        <div class="lang-options">
+          <button class="lang-option original active" data-lang="original">Original (Hinglish)</button>
+          {% for lang in page.translations %}
+            {% if lang == "bn" %}<button class="lang-option" data-lang="bn">বাংলা (Bengali)</button>{% endif %}
+            {% if lang == "en" %}<button class="lang-option" data-lang="en">English</button>{% endif %}
+            {% if lang == "hi" %}<button class="lang-option" data-lang="hi">हिन्दी (Hindi)</button>{% endif %}
+          {% endfor %}
+        </div>
+        <button class="translate-close" id="translateClose">✕ Close</button>
+      </div>
+    </div>
+    {% endif %}
 
     <div class="story-header">
       <h1 class="story-title">{{ page.story_title }}</h1>
@@ -554,6 +575,135 @@
         setTimeout(function() { btn.innerHTML = '🔗 Copy Link'; }, 2000);
       });
     });
+
+    // ============================================
+    // TRANSLATION SYSTEM
+    // ============================================
+    (function() {
+      const translateBtn = document.getElementById('translateBtn');
+      const translateModal = document.getElementById('translateModal');
+      if (!translateBtn || !translateModal) return;
+
+      const translateClose = document.getElementById('translateClose');
+      const langOptions = translateModal.querySelectorAll('.lang-option');
+      const storyContent = document.querySelector('.story-content');
+      const storySlug = window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
+      let originalTexts = {};
+      let currentLang = localStorage.getItem('translate_' + storySlug) || 'original';
+
+      // Get all translatable elements per chapter
+      function getChapterElements() {
+        const chapters = {};
+        const headings = storyContent.querySelectorAll('h2.chapter-heading');
+        headings.forEach((heading, i) => {
+          const chId = heading.id;
+          const nextHeading = headings[i + 1];
+          const elements = [];
+          let el = heading.nextElementSibling;
+          while (el && el !== nextHeading) {
+            if (el.matches('p, span.emphasis')) {
+              elements.push(el);
+            } else if (el.matches('div.dialogue')) {
+              const bubble = el.querySelector('.bubble');
+              if (bubble) elements.push(bubble);
+            }
+            el = el.nextElementSibling;
+          }
+          chapters[chId] = elements;
+        });
+        return chapters;
+      }
+
+      // Save original texts
+      function saveOriginals() {
+        const chapters = getChapterElements();
+        for (const [chId, elements] of Object.entries(chapters)) {
+          originalTexts[chId] = elements.map(el => el.innerHTML);
+        }
+      }
+
+      // Apply translation
+      function applyTranslation(data) {
+        const chapters = getChapterElements();
+        for (const [chId, elements] of Object.entries(chapters)) {
+          const translations = data.chapters[chId];
+          if (!translations) continue;
+          elements.forEach((el, i) => {
+            if (translations[i] !== undefined) {
+              el.innerHTML = translations[i];
+            }
+          });
+        }
+      }
+
+      // Restore originals
+      function restoreOriginals() {
+        const chapters = getChapterElements();
+        for (const [chId, elements] of Object.entries(chapters)) {
+          if (!originalTexts[chId]) continue;
+          elements.forEach((el, i) => {
+            if (originalTexts[chId][i] !== undefined) {
+              el.innerHTML = originalTexts[chId][i];
+            }
+          });
+        }
+      }
+
+      // Update active button
+      function updateActiveBtn(lang) {
+        langOptions.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        translateBtn.textContent = lang === 'original' ? '🌐 Translate' : '🌐 ' + (lang === 'bn' ? 'বাংলা' : lang);
+      }
+
+      // Load and apply a language
+      async function loadLanguage(lang) {
+        if (lang === 'original') {
+          restoreOriginals();
+          currentLang = 'original';
+          localStorage.setItem('translate_' + storySlug, 'original');
+          updateActiveBtn('original');
+          return;
+        }
+        try {
+          const res = await fetch('{{ "/" | relative_url }}assets/translations/' + storySlug + '/' + lang + '.json');
+          if (!res.ok) throw new Error('Not found');
+          const data = await res.json();
+          restoreOriginals();
+          applyTranslation(data);
+          currentLang = lang;
+          localStorage.setItem('translate_' + storySlug, lang);
+          updateActiveBtn(lang);
+        } catch(e) {
+          alert('Translation not available yet.');
+        }
+      }
+
+      // Init
+      saveOriginals();
+      if (currentLang !== 'original') {
+        loadLanguage(currentLang);
+      }
+      updateActiveBtn(currentLang);
+
+      // Events
+      translateBtn.addEventListener('click', function() {
+        translateModal.classList.add('open');
+      });
+      translateClose.addEventListener('click', function() {
+        translateModal.classList.remove('open');
+      });
+      translateModal.addEventListener('click', function(e) {
+        if (e.target === translateModal) translateModal.classList.remove('open');
+      });
+      langOptions.forEach(btn => {
+        btn.addEventListener('click', function() {
+          loadLanguage(this.dataset.lang);
+          translateModal.classList.remove('open');
+        });
+      });
+    })();
 
     // ============================================
     // CHAPTER PROGRESS DOTS

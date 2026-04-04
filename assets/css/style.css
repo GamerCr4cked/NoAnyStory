@@ -1201,6 +1201,95 @@ body::before {
 }
 
 /* ============================================
+   TRANSLATE BUTTON & MODAL
+   ============================================ */
+.translate-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.translate-btn:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.translate-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+}
+.translate-modal.open {
+  display: flex;
+}
+.translate-modal-content {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.translate-modal-content h3 {
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+.lang-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.lang-option {
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-main);
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.lang-option:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-subtle);
+}
+.lang-option.active {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-weight: 700;
+}
+.translate-close {
+  padding: 8px 20px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+.translate-close:hover {
+  color: var(--text-primary);
+}
+
+/* ============================================
    SHARE BUTTONS
    ============================================ */
 .share-section {
