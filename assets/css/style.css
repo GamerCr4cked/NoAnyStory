@@ -1261,6 +1261,18 @@ body::before {
   color: #1da1f2;
 }
 
+.share-btn.messenger:hover {
+  background: rgba(0, 132, 255, 0.1);
+  border-color: rgba(0, 132, 255, 0.3);
+  color: #0084ff;
+}
+
+.share-btn.discord:hover {
+  background: rgba(88, 101, 242, 0.1);
+  border-color: rgba(88, 101, 242, 0.3);
+  color: #5865f2;
+}
+
 .share-btn.copy:hover {
   background: var(--accent-subtle);
   border-color: rgba(232, 176, 89, 0.3);
