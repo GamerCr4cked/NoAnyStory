@@ -1249,28 +1249,10 @@ body::before {
   box-shadow: var(--shadow-md);
 }
 
-.share-btn.whatsapp:hover {
-  background: rgba(37, 211, 102, 0.1);
-  border-color: rgba(37, 211, 102, 0.3);
-  color: #25d366;
-}
-
-.share-btn.twitter:hover {
-  background: rgba(29, 161, 242, 0.1);
-  border-color: rgba(29, 161, 242, 0.3);
-  color: #1da1f2;
-}
-
-.share-btn.messenger:hover {
-  background: rgba(0, 132, 255, 0.1);
-  border-color: rgba(0, 132, 255, 0.3);
-  color: #0084ff;
-}
-
-.share-btn.discord:hover {
-  background: rgba(88, 101, 242, 0.1);
-  border-color: rgba(88, 101, 242, 0.3);
-  color: #5865f2;
+.share-btn.native-share:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: #6366f1;
 }
 
 .share-btn.copy:hover {

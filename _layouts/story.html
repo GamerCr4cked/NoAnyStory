@@ -56,10 +56,7 @@
     <div class="share-section">
       <p>Share this story</p>
       <div class="share-buttons">
-        <a class="share-btn whatsapp" id="shareWhatsapp" target="_blank" rel="noopener">📱 WhatsApp</a>
-        <a class="share-btn twitter" id="shareTwitter" target="_blank" rel="noopener">🐦 Twitter</a>
-        <a class="share-btn messenger" id="shareMessenger" target="_blank" rel="noopener">💬 Messenger</a>
-        <a class="share-btn discord" id="shareDiscord" target="_blank" rel="noopener">🎮 Discord</a>
+        <button class="share-btn native-share" id="shareNative">📤 Share</button>
         <button class="share-btn copy" id="shareCopy">🔗 Copy Link</button>
       </div>
     </div>
@@ -539,20 +536,16 @@
     const storyTitle = '{{ page.story_title }} — NotAnArtical';
     const storyUrl = window.location.href;
 
-    document.getElementById('shareWhatsapp').href =
-      'https://wa.me/?text=' + encodeURIComponent(storyTitle + '\n' + storyUrl);
-
-    document.getElementById('shareTwitter').href =
-      'https://twitter.com/intent/tweet?text=' + encodeURIComponent(storyTitle) + '&url=' + encodeURIComponent(storyUrl);
-
-    document.getElementById('shareMessenger').href =
-      'https://www.facebook.com/dialog/send?link=' + encodeURIComponent(storyUrl) + '&app_id=966242223397117&redirect_uri=' + encodeURIComponent(storyUrl);
-
-    document.getElementById('shareDiscord').href =
-      'https://discord.com/channels/@me';
-    document.getElementById('shareDiscord').addEventListener('click', function(e) {
-      navigator.clipboard.writeText(storyTitle + '\n' + storyUrl);
-    });
+    // Native Share (OS share menu — works on mobile + desktop Chrome/Edge)
+    const shareNativeBtn = document.getElementById('shareNative');
+    if (navigator.share) {
+      shareNativeBtn.addEventListener('click', function() {
+        navigator.share({ title: storyTitle, url: storyUrl });
+      });
+    } else {
+      // Fallback: hide native share, copy link is enough
+      shareNativeBtn.style.display = 'none';
+    }
 
     document.getElementById('shareCopy').addEventListener('click', function() {
       const btn = this;
