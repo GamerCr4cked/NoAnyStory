@@ -7,10 +7,10 @@
   <meta name="description" content="{{ page.description | default: site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F4D6;</text></svg>">
+  <script>
+    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var f=localStorage.getItem('fontSize');if(f)document.documentElement.style.setProperty('--story-font-size',f+'px');})();
+  </script>
 </head>
-<script>
-  (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var f=localStorage.getItem('fontSize');if(f)document.documentElement.style.setProperty('--story-font-size',f+'px');})();
-</script>
 <body class="story-page">
   <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
   <div class="site-wrapper">
