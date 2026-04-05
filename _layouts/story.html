@@ -148,301 +148,244 @@
     // CHARACTER PROFILES + PFP SYSTEM
     // ============================================
 
-    const CHARACTER_DB = {
+    // Story-based character database — each story has its own characters
+    // Lookup: detect story slug from URL, then get characters for that story only
+    const STORY_CHARACTERS = {
       // ---- Notun Pakhi (all seasons) ----
-      'Suresh': {
-        name: 'Suresh',
-        initials: 'S',
-        role: 'Main Character',
-        color: '#6db3f2',
-        bg: 'rgba(109, 179, 242, 0.15)',
-        border: 'rgba(109, 179, 242, 0.4)',
-        details: [
-          { label: 'Class', value: '10th → 12th' },
-          { label: 'Type', value: 'Introvert banda, awkward around her' }
-        ],
-        bio: 'Ek average ladka jisko apni feelings express karna nahi aata. Door se dekhta tha, dheere dheere karib aaya, aur ab un feelings ko samajhne ki koshish kar raha hai.'
-      },
-      'Akhi': {
-        name: 'Akhi',
-        initials: 'A',
-        role: 'Main Character',
-        color: '#f4a0b5',
-        bg: 'rgba(244, 160, 181, 0.15)',
-        border: 'rgba(244, 160, 181, 0.4)',
-        details: [
-          { label: 'Nickname', value: 'Notun Pakhi' },
-          { label: 'Class', value: '7th → 9th' },
-          { label: 'Type', value: 'Confident, seedhi baat, thodi shy' }
-        ],
-        bio: 'Wo ladki jise Suresh ne "Notun Pakhi" naam diya bina bataye. Pehle chhoti thi, ab badal rahi hai — confident, funny, aur uske saath comfortable.'
-      },
-      'Riya': {
-        name: 'Riya',
-        initials: 'R',
-        role: 'Akhi\'s Best Friend',
-        color: '#48c78e',
-        bg: 'rgba(72, 199, 142, 0.15)',
-        border: 'rgba(72, 199, 142, 0.4)',
-        details: [
-          { label: 'Class', value: 'Same as Akhi' },
-          { label: 'Type', value: 'Chulbuli, mazaak karne wali' }
-        ],
-        bio: 'Akhi ki best friend. Hamesha mazaak udati hai, par dil se supportive. Sab kuch notice karti hai — especially Suresh aur Akhi ke beech.'
-      },
-      'Rahul': {
-        name: 'Rahul',
-        initials: 'Ra',
-        role: 'Suresh\'s Best Friend',
-        color: '#f0a050',
-        bg: 'rgba(240, 160, 80, 0.15)',
-        border: 'rgba(240, 160, 80, 0.4)',
-        details: [
-          { label: 'Class', value: 'Same as Suresh' },
-          { label: 'Type', value: 'Loud, wingman, comedy ka stock' }
-        ],
-        bio: 'Suresh ka close dost. Hamesha usse push karta hai Akhi se baat karne ke liye. Khud ki love life zero, par doosron ki love life me expert.'
+      'notun-pakhi': {
+        'Suresh': {
+          name: 'Suresh', initials: 'S', role: 'Main Character',
+          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
+          details: [
+            { label: 'Class', value: '10th → 12th' },
+            { label: 'Type', value: 'Introvert banda, awkward around her' }
+          ],
+          bio: 'Ek average ladka jisko apni feelings express karna nahi aata. Door se dekhta tha, dheere dheere karib aaya, aur ab un feelings ko samajhne ki koshish kar raha hai.'
+        },
+        'Akhi': {
+          name: 'Akhi', initials: 'A', role: 'Main Character',
+          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
+          details: [
+            { label: 'Nickname', value: 'Notun Pakhi' },
+            { label: 'Class', value: '7th → 9th' },
+            { label: 'Type', value: 'Confident, seedhi baat, thodi shy' }
+          ],
+          bio: 'Wo ladki jise Suresh ne "Notun Pakhi" naam diya bina bataye. Pehle chhoti thi, ab badal rahi hai — confident, funny, aur uske saath comfortable.'
+        },
+        'Riya': {
+          name: 'Riya', initials: 'R', role: 'Akhi\'s Best Friend',
+          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
+          details: [
+            { label: 'Class', value: 'Same as Akhi' },
+            { label: 'Type', value: 'Chulbuli, mazaak karne wali' }
+          ],
+          bio: 'Akhi ki best friend. Hamesha mazaak udati hai, par dil se supportive. Sab kuch notice karti hai — especially Suresh aur Akhi ke beech.'
+        },
+        'Rahul': {
+          name: 'Rahul', initials: 'Ra', role: 'Suresh\'s Best Friend',
+          color: '#f0a050', bg: 'rgba(240, 160, 80, 0.15)', border: 'rgba(240, 160, 80, 0.4)',
+          details: [
+            { label: 'Class', value: 'Same as Suresh' },
+            { label: 'Type', value: 'Loud, wingman, comedy ka stock' }
+          ],
+          bio: 'Suresh ka close dost. Hamesha usse push karta hai Akhi se baat karne ke liye. Khud ki love life zero, par doosron ki love life me expert.'
+        }
       },
 
       // ---- The Last Message ----
-      'Mr. X': {
-        name: 'Mr. X',
-        initials: '?',
-        role: 'Main Character',
-        color: '#6db3f2',
-        bg: 'rgba(109, 179, 242, 0.15)',
-        border: 'rgba(109, 179, 242, 0.4)',
-        unknown: true,
-        details: [
-          { label: 'Identity', value: 'Unknown' },
-          { label: 'Type', value: 'Silence se darta hai, overthink karta hai' }
-        ],
-        bio: 'Wo ladka jo silence se darta tha. Jisko laga tha ki kuch cheezein hamesha rahti hain — par galat tha.'
-      },
-      'Ms. Y': {
-        name: 'Ms. Y',
-        initials: '?',
-        role: 'Main Character',
-        color: '#f4a0b5',
-        bg: 'rgba(244, 160, 181, 0.15)',
-        border: 'rgba(244, 160, 181, 0.4)',
-        unknown: true,
-        details: [
-          { label: 'Identity', value: 'Unknown' },
-          { label: 'Type', value: 'Caring par guarded, apni problems chupati hai' }
-        ],
-        bio: 'Wo ladki jo sab kuch chhupake rakhti thi. Care karti thi, par khud ke baare me kabhi nahi bolti thi. Ek din chali gayi — bina reason diye.'
+      'the-last-message': {
+        'Mr. X': {
+          name: 'Mr. X', initials: '?', role: 'Main Character',
+          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
+          unknown: true,
+          details: [
+            { label: 'Identity', value: 'Unknown' },
+            { label: 'Type', value: 'Silence se darta hai, overthink karta hai' }
+          ],
+          bio: 'Wo ladka jo silence se darta tha. Jisko laga tha ki kuch cheezein hamesha rahti hain — par galat tha.'
+        },
+        'Ms. Y': {
+          name: 'Ms. Y', initials: '?', role: 'Main Character',
+          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
+          unknown: true,
+          details: [
+            { label: 'Identity', value: 'Unknown' },
+            { label: 'Type', value: 'Caring par guarded, apni problems chupati hai' }
+          ],
+          bio: 'Wo ladki jo sab kuch chhupake rakhti thi. Care karti thi, par khud ke baare me kabhi nahi bolti thi. Ek din chali gayi — bina reason diye.'
+        },
+        "X's Friend": {
+          name: "X's Friend", initials: '?', role: 'Mr. X ka Dost',
+          color: '#f0a050', bg: 'rgba(240, 160, 80, 0.15)', border: 'rgba(240, 160, 80, 0.4)',
+          unknown: true,
+          details: [
+            { label: 'Identity', value: 'Unknown' },
+            { label: 'Type', value: 'Supportive dost, practical' }
+          ],
+          bio: 'X ka close friend. Notice karta hai ki X badal gaya hai, par samajh nahi paata kaise help kare.'
+        },
+        "Y's Friend": {
+          name: "Y's Friend", initials: '?', role: 'Ms. Y ki Dost',
+          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
+          unknown: true,
+          details: [
+            { label: 'Identity', value: 'Unknown' },
+            { label: 'Type', value: 'Caring friend, seedhi baat' }
+          ],
+          bio: 'Y ki close friend. Jaanti hai ki Y andar se toot rahi hai, par Y khud accept nahi karti.'
+        }
       },
 
       // ---- Phir Milenge (all seasons) ----
-      'Arhan': {
-        name: 'Arhan',
-        initials: 'A',
-        role: 'Main Character',
-        color: '#6db3f2',
-        bg: 'rgba(109, 179, 242, 0.15)',
-        border: 'rgba(109, 179, 242, 0.4)',
-        details: [
-          { label: 'Age', value: '18 → 22' },
-          { label: 'College', value: 'BSc Student' },
-          { label: 'Passion', value: 'Photography' },
-          { label: 'Type', value: 'Introvert, loyal, sochta bohot hai' }
-        ],
-        bio: 'Ek introvert ladka jo college me pehli baar kisi se itna connected hua. Photography uska sahara hai — jab sab bikhar gaya, camera ne sambhala.'
-      },
-      'Inaya': {
-        name: 'Inaya',
-        initials: 'I',
-        role: 'Main Character',
-        color: '#f4a0b5',
-        bg: 'rgba(244, 160, 181, 0.15)',
-        border: 'rgba(244, 160, 181, 0.4)',
-        details: [
-          { label: 'Age', value: '18 → 22' },
-          { label: 'College', value: 'BSc Student' },
-          { label: 'Passion', value: 'Writing' },
-          { label: 'Type', value: 'Extrovert, emotional, seedhi baat' }
-        ],
-        bio: 'Wo ladki jo Arhan ki zindagi me aayi jaise koi storm aata hai — achanak, tez, aur sab kuch badal ke. Galtiyan ki, par dil sachcha tha.'
-      },
-      'Vikram': {
-        name: 'Vikram',
-        initials: 'V',
-        role: 'Arhan\'s Best Friend',
-        color: '#48c78e',
-        bg: 'rgba(72, 199, 142, 0.15)',
-        border: 'rgba(72, 199, 142, 0.4)',
-        details: [
-          { label: 'College', value: 'Same as Arhan' },
-          { label: 'Type', value: 'Loyal dost, practical advice deta hai' }
-        ],
-        bio: 'Arhan ka roommate aur best friend. Jab sab ne side chhod di, Vikram khada raha. Practical hai, par jab zarurat hoti hai — emotional bhi ho jaata hai.'
-      },
-      'Meera': {
-        name: 'Meera',
-        initials: 'Me',
-        role: 'Inaya\'s Friend',
-        color: '#a78bfa',
-        bg: 'rgba(167, 139, 250, 0.15)',
-        border: 'rgba(167, 139, 250, 0.4)',
-        details: [
-          { label: 'College', value: 'Same batch' },
-          { label: 'Type', value: 'Sweet, supportive, thodi gossip queen' }
-        ],
-        bio: 'Inaya ki college friend. Dono ke breakup ke baad bhi neutral rahi — dono ki baat sunti thi bina judge kiye.'
-      },
-      'Rehan': {
-        name: 'Rehan',
-        initials: 'Re',
-        role: 'The Third Person',
-        color: '#fbbf24',
-        bg: 'rgba(251, 191, 36, 0.15)',
-        border: 'rgba(251, 191, 36, 0.4)',
-        details: [
-          { label: 'Connection', value: 'Inaya ki school friend' },
-          { label: 'Type', value: 'Charming, friendly, unclear intentions' }
-        ],
-        bio: 'Wo purana school friend jo summer me reconnect hua. Charming tha, caring dikha — par usne boundaries cross ki jab Arhan door tha.'
-      },
-      "X's Friend": {
-        name: "X's Friend",
-        initials: '?',
-        role: 'Mr. X ka Dost',
-        color: '#f0a050',
-        bg: 'rgba(240, 160, 80, 0.15)',
-        border: 'rgba(240, 160, 80, 0.4)',
-        unknown: true,
-        details: [
-          { label: 'Identity', value: 'Unknown' },
-          { label: 'Type', value: 'Supportive dost, practical' }
-        ],
-        bio: 'X ka close friend. Notice karta hai ki X badal gaya hai, par samajh nahi paata kaise help kare.'
-      },
-      "Y's Friend": {
-        name: "Y's Friend",
-        initials: '?',
-        role: 'Ms. Y ki Dost',
-        color: '#48c78e',
-        bg: 'rgba(72, 199, 142, 0.15)',
-        border: 'rgba(72, 199, 142, 0.4)',
-        unknown: true,
-        details: [
-          { label: 'Identity', value: 'Unknown' },
-          { label: 'Type', value: 'Caring friend, seedhi baat' }
-        ],
-        bio: 'Y ki close friend. Jaanti hai ki Y andar se toot rahi hai, par Y khud accept nahi karti.'
+      'phir-milenge': {
+        'Arhan': {
+          name: 'Arhan', initials: 'A', role: 'Main Character',
+          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
+          details: [
+            { label: 'Age', value: '18 → 22' },
+            { label: 'College', value: 'BSc Student' },
+            { label: 'Passion', value: 'Photography' },
+            { label: 'Type', value: 'Introvert, loyal, sochta bohot hai' }
+          ],
+          bio: 'Ek introvert ladka jo college me pehli baar kisi se itna connected hua. Photography uska sahara hai — jab sab bikhar gaya, camera ne sambhala.'
+        },
+        'Inaya': {
+          name: 'Inaya', initials: 'I', role: 'Main Character',
+          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
+          details: [
+            { label: 'Age', value: '18 → 22' },
+            { label: 'College', value: 'BSc Student' },
+            { label: 'Passion', value: 'Writing' },
+            { label: 'Type', value: 'Extrovert, emotional, seedhi baat' }
+          ],
+          bio: 'Wo ladki jo Arhan ki zindagi me aayi jaise koi storm aata hai — achanak, tez, aur sab kuch badal ke. Galtiyan ki, par dil sachcha tha.'
+        },
+        'Vikram': {
+          name: 'Vikram', initials: 'V', role: 'Arhan\'s Best Friend',
+          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
+          details: [
+            { label: 'College', value: 'Same as Arhan' },
+            { label: 'Type', value: 'Loyal dost, practical advice deta hai' }
+          ],
+          bio: 'Arhan ka roommate aur best friend. Jab sab ne side chhod di, Vikram khada raha. Practical hai, par jab zarurat hoti hai — emotional bhi ho jaata hai.'
+        },
+        'Meera': {
+          name: 'Meera', initials: 'Me', role: 'Inaya\'s Friend',
+          color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.15)', border: 'rgba(167, 139, 250, 0.4)',
+          details: [
+            { label: 'College', value: 'Same batch' },
+            { label: 'Type', value: 'Sweet, supportive, thodi gossip queen' }
+          ],
+          bio: 'Inaya ki college friend. Dono ke breakup ke baad bhi neutral rahi — dono ki baat sunti thi bina judge kiye.'
+        },
+        'Rehan': {
+          name: 'Rehan', initials: 'Re', role: 'The Third Person',
+          color: '#fbbf24', bg: 'rgba(251, 191, 36, 0.15)', border: 'rgba(251, 191, 36, 0.4)',
+          details: [
+            { label: 'Connection', value: 'Inaya ki school friend' },
+            { label: 'Type', value: 'Charming, friendly, unclear intentions' }
+          ],
+          bio: 'Wo purana school friend jo summer me reconnect hua. Charming tha, caring dikha — par usne boundaries cross ki jab Arhan door tha.'
+        }
       },
 
       // ---- Zinda ----
-      'Arjun': {
-        name: 'Arjun',
-        initials: 'Ar',
-        role: 'Main Character',
-        color: '#6db3f2',
-        bg: 'rgba(109, 179, 242, 0.15)',
-        border: 'rgba(109, 179, 242, 0.4)',
-        details: [
-          { label: 'Age', value: '25' },
-          { label: 'Job', value: 'Software Developer, TechNova Solutions' },
-          { label: 'Type', value: 'Extreme introvert, feelings-less, alive dead guy' }
-        ],
-        bio: 'Ek insaan jo jeeta tha par zinda nahi tha. Same routine, same silence, same loneliness — har din. Jab tak ek ladki ne bus stop pe uska haath nahi pakda.'
-      },
-      'Nisha': {
-        name: 'Nisha',
-        initials: 'N',
-        role: 'Main Character',
-        color: '#f4a0b5',
-        bg: 'rgba(244, 160, 181, 0.15)',
-        border: 'rgba(244, 160, 181, 0.4)',
-        details: [
-          { label: 'Age', value: '23' },
-          { label: 'Job', value: 'Software Developer, TechNova Solutions' },
-          { label: 'Type', value: 'Thodi shy, caring, patient, curious' }
-        ],
-        bio: 'Wo ladki jisne ek "dead" insaan me zindagi dhundh li. Dabba, chai, sticky notes, aur bohot saara patience — usne Arjun ko wapas duniya me laaya.'
-      },
-      'Sahil': {
-        name: 'Sahil',
-        initials: 'S',
-        role: 'Arjun ka Desk Neighbor / Only Friend',
-        color: '#48c78e',
-        bg: 'rgba(72, 199, 142, 0.15)',
-        border: 'rgba(72, 199, 142, 0.4)',
-        details: [
-          { label: 'Job', value: 'Developer, TechNova Solutions' },
-          { label: 'Type', value: 'Funny, loud, loyal, self-proclaimed best man' }
-        ],
-        bio: '1.5 saal ki one-sided friendship. Sahil ne har din try kiya Arjun se baat karne ka — aur jab finally Arjun khula, Sahil roya. Literally.'
-      },
-      'Priya': {
-        name: 'Priya',
-        initials: 'P',
-        role: 'Nisha ki Office Bestie',
-        color: '#a78bfa',
-        bg: 'rgba(167, 139, 250, 0.15)',
-        border: 'rgba(167, 139, 250, 0.4)',
-        details: [
-          { label: 'Job', value: 'Designer, TechNova Solutions' },
-          { label: 'Type', value: 'Bubbly, teasing, supportive, emoji queen' }
-        ],
-        bio: 'Nisha ki best friend aur unofficial relationship advisor. Har update pe 47 messages bhejti hai. Har moment pe "MUJHE PATA THA" bolti hai.'
-      },
-      'Kabir': {
-        name: 'Kabir',
-        initials: 'K',
-        role: 'New Guy / Jealousy Trigger',
-        color: '#f0a050',
-        bg: 'rgba(240, 160, 80, 0.15)',
-        border: 'rgba(240, 160, 80, 0.4)',
-        details: [
-          { label: 'Job', value: 'Senior Developer, TechNova Solutions' },
-          { label: 'Type', value: 'Charming, confident, flirty' }
-        ],
-        bio: 'Naya aaya, sabse dost bana liya, Nisha se thoda zyada friendly. Kuch galat nahi kiya — par uski wajah se Arjun ko pehli baar jealousy feel hui.'
-      },
-      'Sneha': {
-        name: 'Sneha',
-        initials: 'Sn',
-        role: 'College Classmate',
-        color: '#fbbf24',
-        bg: 'rgba(251, 191, 36, 0.15)',
-        border: 'rgba(251, 191, 36, 0.4)',
-        details: [
-          { label: 'Connection', value: 'Arjun ki college batch' },
-          { label: 'Type', value: 'Bubbly, touchy, nostalgic' }
-        ],
-        bio: 'College me Arjun me interested thi. 3 saal baad achanak office me aa gayi — hug, baatein, number exchange. Nisha ke liye ye jealousy ka trigger ban gayi.'
+      'zinda': {
+        'Arjun': {
+          name: 'Arjun', initials: 'Ar', role: 'Main Character',
+          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
+          details: [
+            { label: 'Age', value: '25' },
+            { label: 'Job', value: 'Software Developer, TechNova Solutions' },
+            { label: 'Type', value: 'Extreme introvert, feelings-less, alive dead guy' }
+          ],
+          bio: 'Ek insaan jo jeeta tha par zinda nahi tha. Same routine, same silence, same loneliness — har din. Jab tak ek ladki ne bus stop pe uska haath nahi pakda.'
+        },
+        'Nisha': {
+          name: 'Nisha', initials: 'N', role: 'Main Character',
+          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
+          details: [
+            { label: 'Age', value: '23' },
+            { label: 'Job', value: 'Software Developer, TechNova Solutions' },
+            { label: 'Type', value: 'Thodi shy, caring, patient, curious' }
+          ],
+          bio: 'Wo ladki jisne ek "dead" insaan me zindagi dhundh li. Dabba, chai, sticky notes, aur bohot saara patience — usne Arjun ko wapas duniya me laaya.'
+        },
+        'Sahil': {
+          name: 'Sahil', initials: 'S', role: 'Arjun ka Desk Neighbor / Only Friend',
+          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
+          details: [
+            { label: 'Job', value: 'Developer, TechNova Solutions' },
+            { label: 'Type', value: 'Funny, loud, loyal, self-proclaimed best man' }
+          ],
+          bio: '1.5 saal ki one-sided friendship. Sahil ne har din try kiya Arjun se baat karne ka — aur jab finally Arjun khula, Sahil roya. Literally.'
+        },
+        'Priya': {
+          name: 'Priya', initials: 'P', role: 'Nisha ki Office Bestie',
+          color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.15)', border: 'rgba(167, 139, 250, 0.4)',
+          details: [
+            { label: 'Job', value: 'Designer, TechNova Solutions' },
+            { label: 'Type', value: 'Bubbly, teasing, supportive, emoji queen' }
+          ],
+          bio: 'Nisha ki best friend aur unofficial relationship advisor. Har update pe 47 messages bhejti hai. Har moment pe "MUJHE PATA THA" bolti hai.'
+        },
+        'Kabir': {
+          name: 'Kabir', initials: 'K', role: 'New Guy / Jealousy Trigger',
+          color: '#f0a050', bg: 'rgba(240, 160, 80, 0.15)', border: 'rgba(240, 160, 80, 0.4)',
+          details: [
+            { label: 'Job', value: 'Senior Developer, TechNova Solutions' },
+            { label: 'Type', value: 'Charming, confident, flirty' }
+          ],
+          bio: 'Naya aaya, sabse dost bana liya, Nisha se thoda zyada friendly. Kuch galat nahi kiya — par uski wajah se Arjun ko pehli baar jealousy feel hui.'
+        },
+        'Sneha': {
+          name: 'Sneha', initials: 'Sn', role: 'College Classmate',
+          color: '#fbbf24', bg: 'rgba(251, 191, 36, 0.15)', border: 'rgba(251, 191, 36, 0.4)',
+          details: [
+            { label: 'Connection', value: 'Arjun ki college batch' },
+            { label: 'Type', value: 'Bubbly, touchy, nostalgic' }
+          ],
+          bio: 'College me Arjun me interested thi. 3 saal baad achanak office me aa gayi — hug, baatein, number exchange. Nisha ke liye ye jealousy ka trigger ban gayi.'
+        }
       },
 
-      // ---- Wahi Bench, Wahi Feeling ----
-      'Jai': {
-        name: 'Jai',
-        initials: 'J',
-        role: 'Main Character',
-        color: '#6db3f2',
-        bg: 'rgba(109, 179, 242, 0.15)',
-        border: 'rgba(109, 179, 242, 0.4)',
-        details: [
-          { label: 'Class', value: '8th' },
-          { label: 'Type', value: 'Shy, last-bencher, one-sided pyaar wala' }
-        ],
-        bio: 'Ek ordinary ladka jisko ek ladki ne bina kuch kiye hi extraordinary feel karwa diya. Bol nahi paaya, likh ke de diya — par jawab wo nahi mila jo chahta tha.'
-      },
-      'Aarohi': {
-        name: 'Aarohi',
-        initials: 'Aa',
-        role: 'Main Character',
-        color: '#f4a0b5',
-        bg: 'rgba(244, 160, 181, 0.15)',
-        border: 'rgba(244, 160, 181, 0.4)',
-        details: [
-          { label: 'Class', value: '8th' },
-          { label: 'Type', value: 'Sweet, simple, friend bana ke rakhne wali' }
-        ],
-        bio: 'Wo ladki jisko Jai ne letter likha. Usne "friend hi rahein" bola — galat nahi tha, par Jai ke liye kaafi tha tootne ke liye.'
+      // ---- Wahi Face ----
+      'wahi-bench': {
+        'Jai': {
+          name: 'Jai', initials: 'J', role: 'Main Character',
+          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
+          details: [
+            { label: 'Class', value: '8th' },
+            { label: 'Type', value: 'Shy, last-bencher, one-sided pyaar wala' }
+          ],
+          bio: 'Ek ordinary ladka jisko ek ladki ne bina kuch kiye hi extraordinary feel karwa diya. Bol nahi paaya, likh ke de diya — par jawab wo nahi mila jo chahta tha.'
+        },
+        'Aarohi': {
+          name: 'Aarohi', initials: 'Aa', role: 'Main Character',
+          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
+          details: [
+            { label: 'Class', value: '8th' },
+            { label: 'Type', value: 'Sweet, simple, friend bana ke rakhne wali' }
+          ],
+          bio: 'Wo ladki jisko Jai ne letter likha. Usne "friend hi rahein" bola — galat nahi tha, par Jai ke liye kaafi tha tootne ke liye.'
+        },
+        'Sahil': {
+          name: 'Sahil', initials: 'S', role: 'Jai ka Best Friend',
+          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
+          details: [
+            { label: 'Class', value: '8th' },
+            { label: 'Type', value: 'Loyal dost, mazaak udaata hai par saath khada rehta hai' }
+          ],
+          bio: 'Jai ka classmate aur best friend. Sab jaanta hai — Jai ki feelings bhi — par push nahi karta. Jab zarurat hoti hai, chup rehta hai. Jab zarurat hoti hai, shoulder pe haath rakhta hai.'
+        }
       }
     };
+
+    // Detect current story slug from URL
+    // Handles seasons: notun-pakhi-s2 → falls back to notun-pakhi
+    const _storySlug = window.location.pathname.split('/').filter(Boolean).pop().replace('.html', '');
+    const _parentSlug = _storySlug.replace(/-s\d+$/, '');
+    const CHARACTER_DB = STORY_CHARACTERS[_storySlug] || STORY_CHARACTERS[_parentSlug] || {};
 
     // ---- Auto-inject PFPs into dialogues ----
     document.querySelectorAll('.dialogue').forEach(dlg => {
