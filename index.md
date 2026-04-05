@@ -1,11 +1,11 @@
 ---
 layout: default
-title: NotAnArtical
+title: UnsaidPages
 ---
 
 <div class="home-header">
-  <h1>Not<span>An</span>Artical</h1>
-  <p>It looks real. It's not. And that's what hits different.</p>
+  <h1>Unsaid<span>Pages</span></h1>
+  <p>Stories that were felt, not just written.</p>
 </div>
 
 <div class="category-grid">
