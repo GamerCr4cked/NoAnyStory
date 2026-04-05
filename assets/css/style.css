@@ -750,6 +750,18 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
+.dialogue .action {
+  font-size: 12px;
+  font-style: italic;
+  color: #777;
+  margin-top: 4px;
+  max-width: 75%;
+  padding-left: 4px;
+}
+[data-theme="light"] .dialogue .action {
+  color: #888;
+}
+
 .dialogue.her .bubble {
   background: var(--bg-bubble-her);
   border: 1px solid rgba(244, 160, 181, 0.12);

@@ -14,7 +14,7 @@ title: NotAnArtical
     <span class="cat-icon">📖</span>
     <h2>Stories</h2>
     <p class="cat-desc">Real feelings, fictional people. Hinglish stories that hit where it hurts.</p>
-    <span class="cat-count">8 Stories</span>
+    <span class="cat-count">9 Stories</span>
   </a>
 
   <div class="category-card coming-soon-card">
