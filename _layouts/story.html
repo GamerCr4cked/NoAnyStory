@@ -66,7 +66,8 @@
       <div class="story-meta">
         {% if page.genre %}<span class="tag">{{ page.genre }}</span>{% endif %}
         {% if page.mood %}<span class="tag">{{ page.mood }}</span>{% endif %}
-        {% if page.language %}<span class="tag">{{ page.language }}</span>{% endif %}
+        {% if page.languages %}{% for lang in page.languages %}<span class="tag lang-tag">{% if lang == "hi-Latn" %}Hindi/Urdu-Latin{% elsif lang == "bn-Latn" %}Bangla-Latin{% elsif lang == "en" %}English{% elsif lang == "hi" %}Hindi{% elsif lang == "bn" %}Bangla{% elsif lang == "ur" %}Urdu{% else %}{{ lang }}{% endif %}</span>{% endfor %}{% endif %}
+        {% if page.translations %}{% for t in page.translations %}<span class="tag lang-tag translated">{% if t == "bn" %}Bangla{% elsif t == "en" %}English{% elsif t == "hi" %}Hindi{% elsif t == "ur" %}Urdu{% else %}{{ t }}{% endif %}</span>{% endfor %}{% endif %}
         <span class="tag read-time" id="readTime"></span>
       </div>
       {% if page.tagline %}<p class="story-tagline">{{ page.tagline }}</p>{% endif %}

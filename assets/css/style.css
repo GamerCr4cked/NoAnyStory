@@ -1970,6 +1970,18 @@ body::before {
   border-color: rgba(232, 176, 89, 0.15);
 }
 
+.lang-tag {
+  background: rgba(109, 179, 242, 0.1);
+  color: #6db3f2;
+  border-color: rgba(109, 179, 242, 0.15);
+}
+
+.lang-tag.translated {
+  background: rgba(72, 199, 142, 0.1);
+  color: #48c78e;
+  border-color: rgba(72, 199, 142, 0.15);
+}
+
 /* ============================================
    MOOD EMOJI
    ============================================ */
