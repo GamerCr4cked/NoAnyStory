@@ -12,6 +12,7 @@
   </script>
 </head>
 <body class="story-page">
+  <div class="reading-progress" id="readingProgress"></div>
   <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
   <div class="site-wrapper">
     <header class="site-header">
@@ -66,6 +67,7 @@
         {% if page.genre %}<span class="tag">{{ page.genre }}</span>{% endif %}
         {% if page.mood %}<span class="tag">{{ page.mood }}</span>{% endif %}
         {% if page.language %}<span class="tag">{{ page.language }}</span>{% endif %}
+        <span class="tag read-time" id="readTime"></span>
       </div>
       {% if page.tagline %}<p class="story-tagline">{{ page.tagline }}</p>{% endif %}
     </div>
@@ -73,6 +75,23 @@
     <div class="story-content">
       {{ content }}
     </div>
+
+    {% if page.prev_story or page.next_story %}
+    <div class="story-nav">
+      {% if page.prev_story %}
+      <a href="{{ '/stories/' | append: page.prev_story.slug | relative_url }}" class="story-nav-link prev">
+        <span class="nav-label">← Previous</span>
+        <span class="nav-title">{{ page.prev_story.title }}</span>
+      </a>
+      {% else %}<div></div>{% endif %}
+      {% if page.next_story %}
+      <a href="{{ '/stories/' | append: page.next_story.slug | relative_url }}" class="story-nav-link next">
+        <span class="nav-label">Next →</span>
+        <span class="nav-title">{{ page.next_story.title }}</span>
+      </a>
+      {% else %}<div></div>{% endif %}
+    </div>
+    {% endif %}
 
     <div class="share-section">
       <p>Share this story</p>
@@ -816,6 +835,31 @@
         }
       }
     });
+
+    // ============================================
+    // READING PROGRESS BAR
+    // ============================================
+    const progressBar = document.getElementById('readingProgress');
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+    window.addEventListener('scroll', updateProgress);
+    updateProgress();
+
+    // ============================================
+    // READING TIME ESTIMATION
+    // ============================================
+    (function() {
+      const content = document.querySelector('.story-content');
+      if (!content) return;
+      const words = content.textContent.trim().split(/\s+/).length;
+      const minutes = Math.ceil(words / 200);
+      const el = document.getElementById('readTime');
+      if (el) el.textContent = minutes + ' min read';
+    })();
   </script>
 </body>
 </html>
