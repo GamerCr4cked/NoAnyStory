@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F4D6;</text></svg>">
   <script>
-    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var f=localStorage.getItem('fontSize');if(f)document.documentElement.style.setProperty('--story-font-size',f+'px');})();
+    (function(){var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.setAttribute('data-theme','light');}var f=localStorage.getItem('fontSize');if(f)document.documentElement.style.setProperty('--story-font-size',f+'px');})();
   </script>
 </head>
 <body class="story-page">
@@ -751,29 +751,31 @@
       bookmarkTimer = setTimeout(saveBookmark, 500);
     });
 
-    // Show continue banner on load
+    // Show continue banner on load (exact scroll position)
+    const savedPos = localStorage.getItem('bookmark_pos_' + window.location.pathname);
     const savedChapter = localStorage.getItem(storyKey);
-    if (savedChapter && savedChapter !== allChapters[0]?.el.id) {
-      const savedEl = document.getElementById(savedChapter);
-      if (savedEl) {
-        const chLabel = allChapters.find(c => c.el.id === savedChapter)?.pill.textContent || savedChapter;
-        const banner = document.createElement('div');
-        banner.className = 'bookmark-banner';
-        banner.innerHTML = '<span>Continue from <strong>' + chLabel + '</strong>?</span>' +
-          '<button class="bookmark-btn continue" id="bmContinue">Continue</button>' +
-          '<button class="bookmark-btn dismiss" id="bmDismiss">✕</button>';
-        document.body.appendChild(banner);
+    if (savedPos && parseInt(savedPos) > 200) {
+      const posY = parseInt(savedPos);
+      const chLabel = (function() {
+        if (!savedChapter) return 'where you left off';
+        var found = allChapters.find(c => c.el.id === savedChapter);
+        return found ? found.pill.textContent : 'where you left off';
+      })();
+      const banner = document.createElement('div');
+      banner.className = 'bookmark-banner';
+      banner.innerHTML = '<span>Continue from <strong>' + chLabel + '</strong>?</span>' +
+        '<button class="bookmark-btn continue" id="bmContinue">Continue</button>' +
+        '<button class="bookmark-btn dismiss" id="bmDismiss">✕</button>';
+      document.body.appendChild(banner);
 
-        document.getElementById('bmContinue').addEventListener('click', function() {
-          savedEl.scrollIntoView({ behavior: 'smooth' });
-          banner.remove();
-        });
-        document.getElementById('bmDismiss').addEventListener('click', function() {
-          banner.remove();
-        });
-        // Auto-dismiss after 8 seconds
-        setTimeout(function() { if (banner.parentNode) banner.remove(); }, 8000);
-      }
+      document.getElementById('bmContinue').addEventListener('click', function() {
+        window.scrollTo({ top: posY, behavior: 'smooth' });
+        banner.remove();
+      });
+      document.getElementById('bmDismiss').addEventListener('click', function() {
+        banner.remove();
+      });
+      setTimeout(function() { if (banner.parentNode) banner.remove(); }, 8000);
     }
 
     // ============================================
@@ -859,6 +861,51 @@
       const minutes = Math.ceil(words / 200);
       const el = document.getElementById('readTime');
       if (el) el.textContent = minutes + ' min read';
+    })();
+
+    // ============================================
+    // SCROLL REVEAL ANIMATIONS
+    // ============================================
+    (function() {
+      var targets = document.querySelectorAll('.story-content p, .story-content .dialogue, .story-content .moment, .story-content .emphasis, .story-content .thought, .story-content hr, .chapter-heading, .story-end');
+      if (!targets.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ============================================
+    // READING HISTORY (save to localStorage)
+    // ============================================
+    (function() {
+      var slug = window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
+      var title = '{{ page.story_title }}';
+      var history = JSON.parse(localStorage.getItem('readingHistory') || '[]');
+      history = history.filter(function(h) { return h.slug !== slug; });
+      history.unshift({ slug: slug, title: title, time: Date.now() });
+      if (history.length > 5) history = history.slice(0, 5);
+      localStorage.setItem('readingHistory', JSON.stringify(history));
+    })();
+
+    // ============================================
+    // BOOKMARK — save exact scroll position
+    // ============================================
+    (function() {
+      var posKey = 'bookmark_pos_' + window.location.pathname;
+      function savePos() {
+        localStorage.setItem(posKey, window.scrollY);
+      }
+      var posTimer;
+      window.addEventListener('scroll', function() {
+        clearTimeout(posTimer);
+        posTimer = setTimeout(savePos, 300);
+      });
     })();
   </script>
 </body>

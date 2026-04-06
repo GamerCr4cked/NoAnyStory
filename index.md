@@ -25,3 +25,33 @@ title: UnsaidPages
   </div>
 
 </div>
+
+<div class="recently-read-section" id="recentlyRead" style="display:none;">
+  <h2 class="section-title">Recently Read</h2>
+  <div class="recently-read-list" id="recentlyReadList"></div>
+</div>
+
+<script>
+(function() {
+  var history = JSON.parse(localStorage.getItem('readingHistory') || '[]');
+  if (!history.length) return;
+  var section = document.getElementById('recentlyRead');
+  var list = document.getElementById('recentlyReadList');
+  var baseUrl = '{{ "/" | relative_url }}stories/';
+  section.style.display = '';
+  list.innerHTML = history.map(function(h) {
+    var ago = (function(t) {
+      var m = Math.floor((Date.now() - t) / 60000);
+      if (m < 1) return 'Just now';
+      if (m < 60) return m + 'm ago';
+      var hr = Math.floor(m / 60);
+      if (hr < 24) return hr + 'h ago';
+      return Math.floor(hr / 24) + 'd ago';
+    })(h.time);
+    return '<a href="' + baseUrl + h.slug + '" class="recent-item">' +
+      '<span class="recent-title">' + h.title + '</span>' +
+      '<span class="recent-time">' + ago + '</span>' +
+      '</a>';
+  }).join('');
+})();
+</script>
