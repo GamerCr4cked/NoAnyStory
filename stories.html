@@ -4,7 +4,7 @@ title: Stories — UnsaidPages
 ---
 
 <div class="home-header">
-  <h1>Stories <span class="story-count">9</span></h1>
+  <h1>Stories <span class="story-count">10</span></h1>
   <p>Stories that were felt, not just written.</p>
 </div>
 
@@ -183,6 +183,21 @@ title: Stories — UnsaidPages
     </div>
     <h3><span class="mood-emoji">😶</span> Wahi Face</h3>
     <p class="card-desc">8th class. Last bench. Ek ladka jo bol nahi paaya, ek ladki jo samajh nahi paayi. Letter likha, jawab mila — "friend hi rahein." Real story. Real dard.</p>
+    <button class="desc-toggle" onclick="event.preventDefault();event.stopPropagation();this.previousElementSibling.classList.toggle('expanded');this.textContent=this.previousElementSibling.classList.contains('expanded')?'Show Less ▴':'Read More ▾'">Read More ▾</button>
+    <div class="card-footer">
+      <span class="card-lang"></span>
+      <span class="read-link">Read Story →</span>
+    </div>
+  </a>
+
+  <a href="{{ '/stories/split' | relative_url }}" class="story-card" data-tags="romance drama heartbreak" data-langs="hi-Latn">
+    <div class="card-genre">
+      <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Romance</span>
+      <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Drama</span>
+      <span class="tag mood">Heartbreak</span>
+    </div>
+    <h3><span class="mood-emoji">💔</span> Split</h3>
+    <p class="card-desc">Ek flat. Do log. Ek sachcha. Ek nahi. Broker ki galti se saath rehna pada — aur dheere dheere ek freelancer ko laga ki uski roommate usse sach me chahti hai. Par kuch cheezein waise nahi hoti jaise dikhti hain. 14 chapters. Roommate romance. Betrayal. Karma.</p>
     <button class="desc-toggle" onclick="event.preventDefault();event.stopPropagation();this.previousElementSibling.classList.toggle('expanded');this.textContent=this.previousElementSibling.classList.contains('expanded')?'Show Less ▴':'Read More ▾'">Read More ▾</button>
     <div class="card-footer">
       <span class="card-lang"></span>
