@@ -719,11 +719,89 @@
     })();
 
     // ============================================
-    // SCROLL REVEAL ANIMATIONS
+    // SCROLL REVEAL ANIMATIONS — Word-by-Word Flow
     // ============================================
     (function() {
+      // Elements that should NOT get word splitting (just fade in as a block)
+      var skipWordSplit = ['HR', 'story-end', 'chapter-heading'];
+
+      function shouldSkipSplit(el) {
+        if (el.tagName === 'HR') return true;
+        if (el.classList.contains('story-end')) return true;
+        if (el.classList.contains('chapter-heading')) return true;
+        return false;
+      }
+
+      // Split text nodes into word spans, preserving child elements
+      function splitIntoWords(el) {
+        // For dialogue blocks, only split inside the .bubble
+        if (el.classList.contains('dialogue')) {
+          var bubble = el.querySelector('.bubble');
+          if (bubble) splitNodeWords(bubble);
+          return;
+        }
+        splitNodeWords(el);
+      }
+
+      function splitNodeWords(el) {
+        var wordIndex = 0;
+        var childNodes = Array.from(el.childNodes);
+        childNodes.forEach(function(node) {
+          if (node.nodeType === 3) {
+            // Text node — split into words
+            var text = node.textContent;
+            if (!text.trim()) return;
+            var frag = document.createDocumentFragment();
+            var parts = text.split(/(\s+)/);
+            parts.forEach(function(part) {
+              if (/^\s+$/.test(part)) {
+                frag.appendChild(document.createTextNode(part));
+              } else if (part) {
+                var span = document.createElement('span');
+                span.className = 'word';
+                span.style.setProperty('--i', wordIndex);
+                span.textContent = part;
+                frag.appendChild(span);
+                wordIndex++;
+              }
+            });
+            node.parentNode.replaceChild(frag, node);
+          } else if (node.nodeType === 1 && node.tagName !== 'BUTTON') {
+            // Element node (strong, em, a, etc.) — recurse into it
+            var innerNodes = Array.from(node.childNodes);
+            innerNodes.forEach(function(inner) {
+              if (inner.nodeType === 3) {
+                var text = inner.textContent;
+                if (!text.trim()) return;
+                var frag = document.createDocumentFragment();
+                var parts = text.split(/(\s+)/);
+                parts.forEach(function(part) {
+                  if (/^\s+$/.test(part)) {
+                    frag.appendChild(document.createTextNode(part));
+                  } else if (part) {
+                    var span = document.createElement('span');
+                    span.className = 'word';
+                    span.style.setProperty('--i', wordIndex);
+                    span.textContent = part;
+                    frag.appendChild(span);
+                    wordIndex++;
+                  }
+                });
+                inner.parentNode.replaceChild(frag, inner);
+              }
+            });
+          }
+        });
+      }
+
       var targets = document.querySelectorAll('.story-content p, .story-content .dialogue, .story-content .moment, .story-content .emphasis, .story-content .thought, .story-content hr, .chapter-heading, .story-end');
       if (!targets.length) return;
+
+      // Pre-split words for all elements (so they exist in DOM but hidden via CSS)
+      targets.forEach(function(el) {
+        if (!shouldSkipSplit(el)) splitIntoWords(el);
+      });
+
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
@@ -731,7 +809,7 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
       targets.forEach(function(el) { observer.observe(el); });
     })();
 
