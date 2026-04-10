@@ -1,0 +1,50 @@
+{
+  "Aryan": {
+    "initials": "Ar",
+    "role": "Main Character",
+    "color": "#6db3f2",
+    "lightColor": "#3a7fcc",
+    "align": "right",
+    "details": [
+      { "label": "Age", "value": "Unknown" },
+      { "label": "Type", "value": "Overthinker, silent" }
+    ],
+    "bio": "Ek ladka jo silence se darta hai. Bohot sochta hai par bol nahi paata."
+  },
+  "Kavya": {
+    "initials": "K",
+    "role": "Main Character",
+    "color": "#f4a0b5",
+    "lightColor": "#c4728a",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "Unknown" },
+      { "label": "Type", "value": "Caring, guarded" }
+    ],
+    "bio": "Ek ladki jo care karti hai par khud ke baare me kabhi nahi bolti. Apni cheezein chhupa ke rakhti hai."
+  },
+  "Rohit": {
+    "initials": "R",
+    "role": "Aryan ka Dost",
+    "color": "#f0a050",
+    "lightColor": "#c07830",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "Unknown" },
+      { "label": "Type", "value": "Supportive, practical" }
+    ],
+    "bio": "Aryan ka close friend. Notice karta hai ki Aryan badal raha hai par samajh nahi paata kaise help kare."
+  },
+  "Ananya": {
+    "initials": "An",
+    "role": "Kavya ki Dost",
+    "color": "#48c78e",
+    "lightColor": "#2e8b63",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "Unknown" },
+      { "label": "Type", "value": "Caring, seedhi baat" }
+    ],
+    "bio": "Kavya ki close friend. Supportive hai aur samajhti hai usse."
+  }
+}

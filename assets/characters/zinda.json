@@ -1,0 +1,80 @@
+{
+  "Arjun": {
+    "initials": "Ar",
+    "role": "Main Character",
+    "color": "#6db3f2",
+    "lightColor": "#3a7fcc",
+    "align": "right",
+    "details": [
+      { "label": "Age", "value": "25" },
+      { "label": "Job", "value": "Software Developer" },
+      { "label": "Type", "value": "Extreme introvert, quiet" }
+    ],
+    "bio": "Ek ladka jo har din same routine jeeta hai. Na kisi se baat, na kisi se bond. Bas chalta hai — ek direction me, roz."
+  },
+  "Nisha": {
+    "initials": "N",
+    "role": "Main Character",
+    "color": "#f4a0b5",
+    "lightColor": "#c4728a",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "23" },
+      { "label": "Job", "value": "Software Developer" },
+      { "label": "Type", "value": "Shy, caring, patient" }
+    ],
+    "bio": "Nayi aayi hai office me. Thodi shy hai par dil bada hai. Dhyan se dekhti hai logon ko — especially jo chup rehte hain."
+  },
+  "Sahil": {
+    "initials": "S",
+    "role": "Arjun ka Colleague",
+    "color": "#48c78e",
+    "lightColor": "#2e8b63",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "26" },
+      { "label": "Job", "value": "Developer" },
+      { "label": "Type", "value": "Funny, loud, loyal" }
+    ],
+    "bio": "Arjun ke bagal me baithta hai office me. Har din baat karne ki koshish karta hai — chahe jawab aaye ya na aaye."
+  },
+  "Priya": {
+    "initials": "P",
+    "role": "Nisha ki Office Friend",
+    "color": "#a78bfa",
+    "lightColor": "#7c5cbf",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "24" },
+      { "label": "Job", "value": "Designer" },
+      { "label": "Type", "value": "Bubbly, teasing" }
+    ],
+    "bio": "Nisha ki office bestie. Har baat me excited rehti hai. Bohot supportive hai."
+  },
+  "Kabir": {
+    "initials": "K",
+    "role": "New Team Member",
+    "color": "#f0a050",
+    "lightColor": "#c07830",
+    "align": "right",
+    "details": [
+      { "label": "Age", "value": "27" },
+      { "label": "Job", "value": "Senior Developer" },
+      { "label": "Type", "value": "Charming, confident" }
+    ],
+    "bio": "Naya aaya hai team me. Sabse easily dost ban jaata hai. Friendly aur confident insaan."
+  },
+  "Sneha": {
+    "initials": "Sn",
+    "role": "College Classmate",
+    "color": "#fbbf24",
+    "lightColor": "#b08a10",
+    "align": "right",
+    "details": [
+      { "label": "Age", "value": "25" },
+      { "label": "Connection", "value": "College batchmate" },
+      { "label": "Type", "value": "Bubbly, nostalgic" }
+    ],
+    "bio": "Arjun ki college ki batchmate. Saalon baad achanak mil gayi. Bohot baatein karti hai purane dinon ki."
+  }
+}

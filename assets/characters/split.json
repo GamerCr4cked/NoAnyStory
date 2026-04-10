@@ -1,0 +1,68 @@
+{
+  "Aarav": {
+    "initials": "Aa",
+    "role": "Main Character",
+    "color": "#6db3f2",
+    "lightColor": "#3a7fcc",
+    "align": "right",
+    "details": [
+      { "label": "Age", "value": "23" },
+      { "label": "From", "value": "Lucknow" },
+      { "label": "Job", "value": "Freelance Designer" },
+      { "label": "Type", "value": "Simple, genuine, seedha" }
+    ],
+    "bio": "Middle class ladka jo Delhi me freelancing karne aaya. Broker ki galti se ek ladki ke saath flat share karna pada. Logon pe trust karta hai — poora, bina sawaal ke."
+  },
+  "Zara": {
+    "initials": "Z",
+    "role": "Main Character",
+    "color": "#f4a0b5",
+    "lightColor": "#c4728a",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "22" },
+      { "label": "From", "value": "Jaipur" },
+      { "label": "Job", "value": "Content Writer" },
+      { "label": "Type", "value": "Charming, smart, confident" }
+    ],
+    "bio": "Jaipur se Delhi aayi — kaam ke liye, space ke liye. Shabd uski taqat hain. Har situation me sahi baat bolna aata hai. Log uske karib aate hain — naturally."
+  },
+  "Sahil": {
+    "initials": "S",
+    "role": "Aarav ka Best Friend",
+    "color": "#48c78e",
+    "lightColor": "#2e8b63",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "23" },
+      { "label": "From", "value": "Lucknow" },
+      { "label": "Type", "value": "Loyal, protective" }
+    ],
+    "bio": "Aarav ka bachpan ka dost. Dil se chahta hai ki Aarav safe rahe. Jab zaroorat hoti hai, bina bulaye aa jaata hai."
+  },
+  "Pandey ji": {
+    "initials": "Pj",
+    "role": "Broker",
+    "color": "#a78bfa",
+    "lightColor": "#7c5cbf",
+    "align": "left",
+    "details": [
+      { "label": "Type", "value": "Scammy, smooth-talker" }
+    ],
+    "bio": "Chhota aadmi, bada phone. Har baat me 'tension mat lo sir' bolne ki aadat. Ek flat do logon ko de ke gayab ho gaya."
+  },
+  "Dev": {
+    "initials": "D",
+    "role": "Zara ka College Friend",
+    "color": "#f0a050",
+    "lightColor": "#c07830",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "24" },
+      { "label": "From", "value": "Bangalore" },
+      { "label": "Job", "value": "Startup Founder" },
+      { "label": "Type", "value": "Confident, charming" }
+    ],
+    "bio": "Zara ka college ka purana dost. Startup chalata hai Bangalore se. Kabhi kabhi Delhi aata hai milne."
+  }
+}

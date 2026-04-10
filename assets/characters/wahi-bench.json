@@ -1,0 +1,41 @@
+{
+  "Jai": {
+    "initials": "J",
+    "role": "Main Character",
+    "color": "#6db3f2",
+    "lightColor": "#3a7fcc",
+    "align": "right",
+    "details": [
+      { "label": "Age", "value": "13" },
+      { "label": "Class", "value": "8th" },
+      { "label": "Type", "value": "Shy, last-bencher" }
+    ],
+    "bio": "Ek ordinary ladka. Apne kaam me rehta hai, doston ke saath mazaak karta hai. Par kisi ko dekhne ke baad sab badal gaya."
+  },
+  "Aarohi": {
+    "initials": "Aa",
+    "role": "Main Character",
+    "color": "#f4a0b5",
+    "lightColor": "#c4728a",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "13" },
+      { "label": "Class", "value": "8th" },
+      { "label": "Type", "value": "Sweet, simple, quiet" }
+    ],
+    "bio": "Class ki topper. Apne kaam me busy rehti hai. Sabse acche se baat karti hai — koi special treatment nahi kisi ko."
+  },
+  "Sahil": {
+    "initials": "S",
+    "role": "Jai ka Best Friend",
+    "color": "#48c78e",
+    "lightColor": "#2e8b63",
+    "align": "left",
+    "details": [
+      { "label": "Age", "value": "13" },
+      { "label": "Class", "value": "8th" },
+      { "label": "Type", "value": "Loyal, mazaakiya" }
+    ],
+    "bio": "Jai ka classmate aur best friend. Sab notice karta hai par push nahi karta. Jab zaroorat hoti hai, saath khada rehta hai."
+  }
+}

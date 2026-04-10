@@ -168,346 +168,134 @@
     // CHARACTER PROFILES + PFP SYSTEM
     // ============================================
 
-    // Story-based character database — each story has its own characters
-    // Lookup: detect story slug from URL, then get characters for that story only
-    const STORY_CHARACTERS = {
-      // ---- Nayi Chidiya / Notun Pakhi (all seasons) ----
-      'notun-pakhi': {
-        'Suresh': {
-          name: 'Suresh', initials: 'S', role: 'Main Character',
-          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
-          details: [
-            { label: 'Age', value: '15 → 17' },
-            { label: 'Class', value: '10th → 12th' },
-            { label: 'Type', value: 'Introvert, awkward' }
-          ],
-          bio: 'Ek average ladka jo apni feelings express nahi kar paata. Dheere dheere kisi ke karib aata hai — par bol nahi paata.'
-        },
-        'Akhi': {
-          name: 'Akhi', initials: 'A', role: 'Main Character',
-          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
-          details: [
-            { label: 'Age', value: '12 → 14' },
-            { label: 'Nickname', value: 'Nayi Chidiya' },
-            { label: 'Class', value: '7th → 9th' },
-            { label: 'Type', value: 'Confident, seedhi baat' }
-          ],
-          bio: 'Chhoti par confident ladki. Apne kaam me busy rehti hai. Sabse normally baat karti hai — bina kisi pretense ke.'
-        },
-        'Riya': {
-          name: 'Riya', initials: 'R', role: 'Akhi ki Best Friend',
-          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
-          details: [
-            { label: 'Age', value: 'Same as Akhi' },
-            { label: 'Class', value: 'Same as Akhi' },
-            { label: 'Type', value: 'Chulbuli, mazaakiya' }
-          ],
-          bio: 'Akhi ki best friend. Hamesha mazaak udati hai par dil se supportive. Sab kuch notice karti hai.'
-        },
-        'Rahul': {
-          name: 'Rahul', initials: 'Ra', role: 'Suresh ka Best Friend',
-          color: '#f0a050', bg: 'rgba(240, 160, 80, 0.15)', border: 'rgba(240, 160, 80, 0.4)',
-          details: [
-            { label: 'Age', value: 'Same as Suresh' },
-            { label: 'Class', value: 'Same as Suresh' },
-            { label: 'Type', value: 'Loud, funny, wingman' }
-          ],
-          bio: 'Suresh ka close dost. Hamesha push karta hai baat karne ke liye. Khud ki love life zero hai.'
-        }
-      },
-
-      // ---- The Last Message ----
-      'the-last-message': {
-        'Mr. X': {
-          name: 'Mr. X', initials: '?', role: 'Main Character',
-          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
-          unknown: true,
-          details: [
-            { label: 'Identity', value: 'Unknown' },
-            { label: 'Type', value: 'Overthinker, silent' }
-          ],
-          bio: 'Ek ladka jo silence se darta hai. Bohot sochta hai par bol nahi paata.'
-        },
-        'Ms. Y': {
-          name: 'Ms. Y', initials: '?', role: 'Main Character',
-          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
-          unknown: true,
-          details: [
-            { label: 'Identity', value: 'Unknown' },
-            { label: 'Type', value: 'Caring, guarded' }
-          ],
-          bio: 'Ek ladki jo care karti hai par khud ke baare me kabhi nahi bolti. Apni cheezein chhupa ke rakhti hai.'
-        },
-        "X's Friend": {
-          name: "X's Friend", initials: '?', role: 'Mr. X ka Dost',
-          color: '#f0a050', bg: 'rgba(240, 160, 80, 0.15)', border: 'rgba(240, 160, 80, 0.4)',
-          unknown: true,
-          details: [
-            { label: 'Identity', value: 'Unknown' },
-            { label: 'Type', value: 'Supportive, practical' }
-          ],
-          bio: 'X ka close friend. Notice karta hai ki X badal raha hai par samajh nahi paata kaise help kare.'
-        },
-        "Y's Friend": {
-          name: "Y's Friend", initials: '?', role: 'Ms. Y ki Dost',
-          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
-          unknown: true,
-          details: [
-            { label: 'Identity', value: 'Unknown' },
-            { label: 'Type', value: 'Caring, seedhi baat' }
-          ],
-          bio: 'Y ki close friend. Supportive hai aur samajhti hai usse.'
-        }
-      },
-
-      // ---- Phir Milenge (all seasons) ----
-      'phir-milenge': {
-        'Arhan': {
-          name: 'Arhan', initials: 'A', role: 'Main Character',
-          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
-          details: [
-            { label: 'Age', value: '18 → 22' },
-            { label: 'College', value: 'BSc Student' },
-            { label: 'Passion', value: 'Photography' },
-            { label: 'Type', value: 'Introvert, loyal' }
-          ],
-          bio: 'Ek introvert ladka jo college me pehli baar kisi se itna connected hua. Photography uska sahara hai.'
-        },
-        'Inaya': {
-          name: 'Inaya', initials: 'I', role: 'Main Character',
-          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
-          details: [
-            { label: 'Age', value: '18 → 22' },
-            { label: 'College', value: 'BSc Student' },
-            { label: 'Passion', value: 'Writing' },
-            { label: 'Type', value: 'Extrovert, emotional' }
-          ],
-          bio: 'Seedhi baat karne wali ladki. Dil pe le leti hai sab kuch. College me Arhan ke sabse karib hai.'
-        },
-        'Vikram': {
-          name: 'Vikram', initials: 'V', role: 'Arhan ka Best Friend',
-          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
-          details: [
-            { label: 'Age', value: '18 → 22' },
-            { label: 'College', value: 'Same as Arhan' },
-            { label: 'Type', value: 'Loyal, practical' }
-          ],
-          bio: 'Arhan ka roommate aur best friend. Practical hai, par jab zarurat hoti hai emotional bhi ho jaata hai.'
-        },
-        'Meera': {
-          name: 'Meera', initials: 'Me', role: 'Inaya ki Friend',
-          color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.15)', border: 'rgba(167, 139, 250, 0.4)',
-          details: [
-            { label: 'Age', value: '18 → 22' },
-            { label: 'College', value: 'Same batch' },
-            { label: 'Type', value: 'Sweet, supportive' }
-          ],
-          bio: 'Inaya ki college friend. Dono ki baat sunti hai bina judge kiye. Neutral rehti hai.'
-        },
-        'Rehan': {
-          name: 'Rehan', initials: 'Re', role: 'Inaya ka School Friend',
-          color: '#fbbf24', bg: 'rgba(251, 191, 36, 0.15)', border: 'rgba(251, 191, 36, 0.4)',
-          details: [
-            { label: 'Age', value: '20' },
-            { label: 'Connection', value: 'School friend' },
-            { label: 'Type', value: 'Charming, friendly' }
-          ],
-          bio: 'Inaya ka purana school friend. Summer me reconnect hua. Charming hai aur caring dikha hai.'
-        }
-      },
-
-      // ---- Zinda ----
-      'zinda': {
-        'Arjun': {
-          name: 'Arjun', initials: 'Ar', role: 'Main Character',
-          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
-          details: [
-            { label: 'Age', value: '25' },
-            { label: 'Job', value: 'Software Developer' },
-            { label: 'Type', value: 'Extreme introvert, quiet' }
-          ],
-          bio: 'Ek ladka jo har din same routine jeeta hai. Na kisi se baat, na kisi se bond. Bas chalta hai — ek direction me, roz.'
-        },
-        'Nisha': {
-          name: 'Nisha', initials: 'N', role: 'Main Character',
-          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
-          details: [
-            { label: 'Age', value: '23' },
-            { label: 'Job', value: 'Software Developer' },
-            { label: 'Type', value: 'Shy, caring, patient' }
-          ],
-          bio: 'Nayi aayi hai office me. Thodi shy hai par dil bada hai. Dhyan se dekhti hai logon ko — especially jo chup rehte hain.'
-        },
-        'Sahil': {
-          name: 'Sahil', initials: 'S', role: 'Arjun ka Colleague',
-          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
-          details: [
-            { label: 'Age', value: '26' },
-            { label: 'Job', value: 'Developer' },
-            { label: 'Type', value: 'Funny, loud, loyal' }
-          ],
-          bio: 'Arjun ke bagal me baithta hai office me. Har din baat karne ki koshish karta hai — chahe jawab aaye ya na aaye.'
-        },
-        'Priya': {
-          name: 'Priya', initials: 'P', role: 'Nisha ki Office Friend',
-          color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.15)', border: 'rgba(167, 139, 250, 0.4)',
-          details: [
-            { label: 'Age', value: '24' },
-            { label: 'Job', value: 'Designer' },
-            { label: 'Type', value: 'Bubbly, teasing' }
-          ],
-          bio: 'Nisha ki office bestie. Har baat me excited rehti hai. Bohot supportive hai.'
-        },
-        'Kabir': {
-          name: 'Kabir', initials: 'K', role: 'New Team Member',
-          color: '#f0a050', bg: 'rgba(240, 160, 80, 0.15)', border: 'rgba(240, 160, 80, 0.4)',
-          details: [
-            { label: 'Age', value: '27' },
-            { label: 'Job', value: 'Senior Developer' },
-            { label: 'Type', value: 'Charming, confident' }
-          ],
-          bio: 'Naya aaya hai team me. Sabse easily dost ban jaata hai. Friendly aur confident insaan.'
-        },
-        'Sneha': {
-          name: 'Sneha', initials: 'Sn', role: 'College Classmate',
-          color: '#fbbf24', bg: 'rgba(251, 191, 36, 0.15)', border: 'rgba(251, 191, 36, 0.4)',
-          details: [
-            { label: 'Age', value: '25' },
-            { label: 'Connection', value: 'College batchmate' },
-            { label: 'Type', value: 'Bubbly, nostalgic' }
-          ],
-          bio: 'Arjun ki college ki batchmate. Saalon baad achanak mil gayi. Bohot baatein karti hai purane dinon ki.'
-        }
-      },
-
-      // ---- Split ----
-      'split': {
-        'Aarav': {
-          name: 'Aarav', initials: 'Aa', role: 'Main Character',
-          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
-          details: [
-            { label: 'Age', value: '23' },
-            { label: 'From', value: 'Lucknow' },
-            { label: 'Job', value: 'Freelance Designer' },
-            { label: 'Type', value: 'Simple, genuine, seedha' }
-          ],
-          bio: 'Middle class ladka jo Delhi me freelancing karne aaya. Broker ki galti se ek ladki ke saath flat share karna pada. Logon pe trust karta hai — poora, bina sawaal ke.'
-        },
-        'Zara': {
-          name: 'Zara', initials: 'Z', role: 'Main Character',
-          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
-          details: [
-            { label: 'Age', value: '22' },
-            { label: 'From', value: 'Jaipur' },
-            { label: 'Job', value: 'Content Writer' },
-            { label: 'Type', value: 'Charming, smart, confident' }
-          ],
-          bio: 'Jaipur se Delhi aayi — kaam ke liye, space ke liye. Shabd uski taqat hain. Har situation me sahi baat bolna aata hai. Log uske karib aate hain — naturally.'
-        },
-        'Sahil': {
-          name: 'Sahil', initials: 'S', role: 'Aarav ka Best Friend',
-          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
-          details: [
-            { label: 'Age', value: '23' },
-            { label: 'From', value: 'Lucknow' },
-            { label: 'Type', value: 'Loyal, protective' }
-          ],
-          bio: 'Aarav ka bachpan ka dost. Dil se chahta hai ki Aarav safe rahe. Jab zaroorat hoti hai, bina bulaye aa jaata hai.'
-        },
-        'Dev': {
-          name: 'Dev', initials: 'D', role: 'Zara ka College Friend',
-          color: '#f0a050', bg: 'rgba(240, 160, 80, 0.15)', border: 'rgba(240, 160, 80, 0.4)',
-          details: [
-            { label: 'Age', value: '24' },
-            { label: 'From', value: 'Bangalore' },
-            { label: 'Job', value: 'Startup Founder' },
-            { label: 'Type', value: 'Confident, charming' }
-          ],
-          bio: 'Zara ka college ka purana dost. Startup chalata hai Bangalore se. Kabhi kabhi Delhi aata hai milne.'
-        }
-      },
-
-      // ---- Wahi Face ----
-      'wahi-bench': {
-        'Jai': {
-          name: 'Jai', initials: 'J', role: 'Main Character',
-          color: '#6db3f2', bg: 'rgba(109, 179, 242, 0.15)', border: 'rgba(109, 179, 242, 0.4)',
-          details: [
-            { label: 'Age', value: '13' },
-            { label: 'Class', value: '8th' },
-            { label: 'Type', value: 'Shy, last-bencher' }
-          ],
-          bio: 'Ek ordinary ladka. Apne kaam me rehta hai, doston ke saath mazaak karta hai. Par kisi ko dekhne ke baad sab badal gaya.'
-        },
-        'Aarohi': {
-          name: 'Aarohi', initials: 'Aa', role: 'Main Character',
-          color: '#f4a0b5', bg: 'rgba(244, 160, 181, 0.15)', border: 'rgba(244, 160, 181, 0.4)',
-          details: [
-            { label: 'Age', value: '13' },
-            { label: 'Class', value: '8th' },
-            { label: 'Type', value: 'Sweet, simple, quiet' }
-          ],
-          bio: 'Class ki topper. Apne kaam me busy rehti hai. Sabse acche se baat karti hai — koi special treatment nahi kisi ko.'
-        },
-        'Sahil': {
-          name: 'Sahil', initials: 'S', role: 'Jai ka Best Friend',
-          color: '#48c78e', bg: 'rgba(72, 199, 142, 0.15)', border: 'rgba(72, 199, 142, 0.4)',
-          details: [
-            { label: 'Age', value: '13' },
-            { label: 'Class', value: '8th' },
-            { label: 'Type', value: 'Loyal, mazaakiya' }
-          ],
-          bio: 'Jai ka classmate aur best friend. Sab notice karta hai par push nahi karta. Jab zaroorat hoti hai, saath khada rehta hai.'
-        }
-      }
-    };
-
     // Detect current story slug from URL
     // Handles seasons: notun-pakhi-s2 → falls back to notun-pakhi
     const _storySlug = window.location.pathname.split('/').filter(Boolean).pop().replace('.html', '');
     const _parentSlug = _storySlug.replace(/-s\d+$/, '');
-    const CHARACTER_DB = STORY_CHARACTERS[_storySlug] || STORY_CHARACTERS[_parentSlug] || {};
+    const _baseUrl = '{{ "/" | relative_url }}';
+
+    // Fetch character data from JSON file
+    let CHARACTER_DB = {};
+    async function loadCharacters() {
+      const slugsToTry = [_storySlug];
+      if (_storySlug !== _parentSlug) slugsToTry.push(_parentSlug);
+      for (const slug of slugsToTry) {
+        try {
+          const res = await fetch(_baseUrl + 'assets/characters/' + slug + '.json');
+          if (!res.ok) continue;
+          CHARACTER_DB = await res.json();
+          break;
+        } catch(e) { /* try next */ }
+      }
+      // Inject dynamic CSS from character data
+      injectCharacterStyles();
+      // Inject PFPs and wire up popups
+      injectPFPs();
+    }
+
+    // Generate and inject <style> for each character's colors
+    function injectCharacterStyles() {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      let css = '';
+      for (const [name, char] of Object.entries(CHARACTER_DB)) {
+        const cls = slugifyName(name);
+        const color = char.color;
+        const lightColor = char.lightColor || color;
+        const align = char.align === 'right' ? 'flex-end' : 'flex-start';
+        const radiusLeft = '4px var(--radius-md) var(--radius-md) var(--radius-md)';
+        const radiusRight = 'var(--radius-md) 4px var(--radius-md) var(--radius-md)';
+        const radius = char.align === 'right' ? radiusRight : radiusLeft;
+        // Parse color to rgba for bg/border
+        const rgb = hexToRgb(color);
+        const bgRgba = rgb ? 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.08)' : 'transparent';
+        const borderRgba = rgb ? 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.12)' : 'transparent';
+        const pfpBorderRgba = rgb ? 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.4)' : 'var(--border-light)';
+        const pfpBgRgba = rgb ? 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.15)' : 'var(--bg-card)';
+
+        css += '.dialogue.' + cls + '{align-items:' + align + '}\n';
+        css += '.dialogue.' + cls + ' .speaker{color:' + color + '}\n';
+        css += '.dialogue.' + cls + ' .bubble{background:' + bgRgba + ';border:1px solid ' + borderRgba + ';border-radius:' + radius + ';color:' + color + '}\n';
+        css += '.dialogue.' + cls + ' .pfp{border-color:' + pfpBorderRgba + ';color:' + color + ';background:' + pfpBgRgba + '}\n';
+        if (char.align === 'right') {
+          css += '.dialogue.' + cls + ' .speaker{text-align:right}\n';
+          css += '.dialogue.' + cls + ' .msg-row{flex-direction:row-reverse}\n';
+        }
+        // Light theme overrides
+        const lRgb = hexToRgb(lightColor);
+        if (lRgb) {
+          const lBg = 'rgba(' + lRgb.r + ',' + lRgb.g + ',' + lRgb.b + ',0.08)';
+          const lBorder = 'rgba(' + lRgb.r + ',' + lRgb.g + ',' + lRgb.b + ',0.15)';
+          css += '[data-theme="light"] .dialogue.' + cls + ' .speaker{color:' + lightColor + '}\n';
+          css += '[data-theme="light"] .dialogue.' + cls + ' .bubble{background:' + lBg + ';border-color:' + lBorder + ';color:' + lightColor + '}\n';
+        }
+      }
+      const styleEl = document.createElement('style');
+      styleEl.id = 'character-styles';
+      styleEl.textContent = css;
+      document.head.appendChild(styleEl);
+    }
+
+    // Re-inject styles on theme toggle
+    function refreshCharacterStyles() {
+      const old = document.getElementById('character-styles');
+      if (old) old.remove();
+      injectCharacterStyles();
+    }
+
+    function slugifyName(name) {
+      return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+
+    function hexToRgb(hex) {
+      const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return m ? { r: parseInt(m[1],16), g: parseInt(m[2],16), b: parseInt(m[3],16) } : null;
+    }
 
     // ---- Auto-inject PFPs into dialogues ----
-    document.querySelectorAll('.dialogue').forEach(dlg => {
-      const speakerEl = dlg.querySelector('.speaker');
-      const bubbleEl = dlg.querySelector('.bubble');
-      if (!speakerEl || !bubbleEl) return;
+    function injectPFPs() {
+      document.querySelectorAll('.dialogue').forEach(dlg => {
+        const speakerEl = dlg.querySelector('.speaker');
+        const bubbleEl = dlg.querySelector('.bubble');
+        if (!speakerEl || !bubbleEl) return;
 
-      const name = speakerEl.textContent.trim();
-      const char = CHARACTER_DB[name];
+        const name = speakerEl.textContent.trim();
+        const char = CHARACTER_DB[name];
+        const rgb = char ? hexToRgb(char.color) : null;
+        const pfpBorder = rgb ? 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.4)' : 'var(--border-light)';
+        const pfpBg = rgb ? 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.15)' : 'var(--bg-card)';
 
-      // Create PFP
-      const pfp = document.createElement('div');
-      pfp.className = 'pfp';
-      pfp.setAttribute('data-character', name);
+        // Create PFP
+        const pfp = document.createElement('div');
+        pfp.className = 'pfp';
+        pfp.setAttribute('data-character', name);
 
-      if (char) {
-        if (char.unknown) {
-          pfp.classList.add('unknown');
-          pfp.style.borderColor = char.border;
-          pfp.textContent = '';
+        if (char) {
+          if (char.unknown) {
+            pfp.classList.add('unknown');
+            pfp.style.borderColor = pfpBorder;
+            pfp.textContent = '';
+          } else {
+            pfp.textContent = char.initials;
+            pfp.style.borderColor = pfpBorder;
+            pfp.style.color = char.color;
+            pfp.style.background = pfpBg;
+          }
         } else {
-          pfp.textContent = char.initials;
-          pfp.style.borderColor = char.border;
-          pfp.style.color = char.color;
-          pfp.style.background = char.bg;
+          pfp.classList.add('unknown');
         }
-      } else {
-        pfp.classList.add('unknown');
-      }
 
-      // Wrap bubble in msg-row with pfp
-      const msgRow = document.createElement('div');
-      msgRow.className = 'msg-row';
+        // Wrap bubble in msg-row with pfp
+        const msgRow = document.createElement('div');
+        msgRow.className = 'msg-row';
 
-      bubbleEl.parentNode.insertBefore(msgRow, bubbleEl);
-      msgRow.appendChild(pfp);
-      msgRow.appendChild(bubbleEl);
+        bubbleEl.parentNode.insertBefore(msgRow, bubbleEl);
+        msgRow.appendChild(pfp);
+        msgRow.appendChild(bubbleEl);
 
-      // Click PFP → show popup
-      pfp.addEventListener('click', () => showCharPopup(name));
-    });
+        // Click PFP → show popup
+        pfp.addEventListener('click', () => showCharPopup(name));
+      });
+    }
 
     // ---- Popup Logic ----
     const popupOverlay = document.getElementById('charPopup');
@@ -523,21 +311,22 @@
       const detailsEl = document.getElementById('popupDetails');
       const bioEl = document.getElementById('popupBio');
 
+      const rgb = hexToRgb(char.color);
+      const bg = rgb ? 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.15)' : 'var(--bg-card)';
+      const border = rgb ? 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.4)' : 'var(--border-light)';
+
       // PFP
       if (char.unknown) {
         pfpEl.textContent = '?';
-        pfpEl.style.background = char.bg;
-        pfpEl.style.color = char.color;
-        pfpEl.style.border = '3px solid ' + char.border;
       } else {
         pfpEl.textContent = char.initials;
-        pfpEl.style.background = char.bg;
-        pfpEl.style.color = char.color;
-        pfpEl.style.border = '3px solid ' + char.border;
       }
+      pfpEl.style.background = bg;
+      pfpEl.style.color = char.color;
+      pfpEl.style.border = '3px solid ' + border;
 
       // Name & Role
-      nameEl.textContent = char.name;
+      nameEl.textContent = name;
       nameEl.style.color = char.color;
       roleEl.textContent = char.role;
       roleEl.style.color = char.color;
@@ -566,6 +355,9 @@
       if (e.key === 'Escape') popupOverlay.classList.remove('active');
     });
 
+    // Load characters (async — kicks off PFP injection + style injection)
+    loadCharacters();
+
     // ============================================
     // THEME TOGGLE
     // ============================================
@@ -585,6 +377,7 @@
         localStorage.setItem('theme', next);
       }
       updateToggleIcon();
+      refreshCharacterStyles();
     });
 
     // ============================================
