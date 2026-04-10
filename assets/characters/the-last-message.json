@@ -6,10 +6,10 @@
     "lightColor": "#3a7fcc",
     "align": "right",
     "details": [
-      { "label": "Age", "value": "Unknown" },
+      { "label": "Age", "value": "19" },
       { "label": "Type", "value": "Overthinker, silent" }
     ],
-    "bio": "Ek ladka jo silence se darta hai. Bohot sochta hai par bol nahi paata."
+    "bio": "Silence se darta hai. Sab notice karta hai — par bol nahi paata. Jab kuch kho jaata hai toh type karta hai, delete karta hai, phir screen dekhta rehta hai."
   },
   "Kavya": {
     "initials": "K",
@@ -18,10 +18,10 @@
     "lightColor": "#c4728a",
     "align": "left",
     "details": [
-      { "label": "Age", "value": "Unknown" },
+      { "label": "Age", "value": "19" },
       { "label": "Type", "value": "Caring, guarded" }
     ],
-    "bio": "Ek ladki jo care karti hai par khud ke baare me kabhi nahi bolti. Apni cheezein chhupa ke rakhti hai."
+    "bio": "Chaos aur calm ek saath. 15 minute non-stop bolti hai phir achanak kuch itna soft bol deti hai ki guard pe pakad le. Door isliye gayi kyuki tootna nahi dikhana tha."
   },
   "Rohit": {
     "initials": "R",
@@ -30,10 +30,10 @@
     "lightColor": "#c07830",
     "align": "left",
     "details": [
-      { "label": "Age", "value": "Unknown" },
+      { "label": "Age", "value": "Same as Aryan" },
       { "label": "Type", "value": "Supportive, practical" }
     ],
-    "bio": "Aryan ka close friend. Notice karta hai ki Aryan badal raha hai par samajh nahi paata kaise help kare."
+    "bio": "Aryan ka close friend. Notice karta hai ki Aryan badal raha hai — kha nahi raha, chup hai. Fix nahi kar sakta par chhodta bhi nahi."
   },
   "Ananya": {
     "initials": "An",
@@ -42,9 +42,9 @@
     "lightColor": "#2e8b63",
     "align": "left",
     "details": [
-      { "label": "Age", "value": "Unknown" },
+      { "label": "Age", "value": "Same as Kavya" },
       { "label": "Type", "value": "Caring, seedhi baat" }
     ],
-    "bio": "Kavya ki close friend. Supportive hai aur samajhti hai usse."
+    "bio": "Kavya ki close friend. Seedha poochti hai — miss karti hai usse? Jaanti hai jawab kya hai, phir bhi poochti hai."
   }
 }
