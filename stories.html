@@ -4,7 +4,7 @@ title: Stories — UnsaidPages
 ---
 
 <div class="home-header">
-  <h1>Stories <span class="story-count">10</span></h1>
+  <h1>Stories <span class="story-count">{{ site.pages | where: "layout", "story" | size }}</span></h1>
   <p>Stories that were felt, not just written.</p>
 </div>
 
@@ -198,6 +198,22 @@ title: Stories — UnsaidPages
     </div>
     <h3><span class="mood-emoji">💔</span> Split</h3>
     <p class="card-desc">Broker ki galti se ek flat me do ajnabi. Ek freelancer, ek content writer. Dheere dheere dosti hui, phir kuch aur. Par kuch cheezein waise nahi hoti jaise dikhti hain. 14 chapters. Roommate romance.</p>
+    <button class="desc-toggle" onclick="event.preventDefault();event.stopPropagation();this.previousElementSibling.classList.toggle('expanded');this.textContent=this.previousElementSibling.classList.contains('expanded')?'Show Less ▴':'Read More ▾'">Read More ▾</button>
+    <div class="card-footer">
+      <span class="card-lang"></span>
+      <span class="read-link">Read Story →</span>
+    </div>
+  </a>
+
+  <a href="{{ '/stories/offline' | relative_url }}" class="story-card" data-tags="emotional heartbreak friendship drama" data-langs="hi-Latn">
+    <div class="card-genre">
+      <span class="tag mood">Emotional</span>
+      <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Heartbreak</span>
+      <span class="tag" style="background: rgba(201, 160, 220, 0.1); color: #c9a0dc; border-color: rgba(201, 160, 220, 0.15);">Friendship</span>
+      <span class="tag" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.15);">Drama</span>
+    </div>
+    <h3><span class="mood-emoji">🖥️</span> Offline</h3>
+    <p class="card-desc">Ek Discord server. Teen owners. Ek ladki jo "hi" bol ke sab badal gayi. Pyaar hua, screenshots leak hue, confessions delete hue — aur phir ek din wo offline ho gayi. 3 mahine baad wapas aayi. Par ab usse kuch yaad nahi. 10 chapters. Based on a true story.</p>
     <button class="desc-toggle" onclick="event.preventDefault();event.stopPropagation();this.previousElementSibling.classList.toggle('expanded');this.textContent=this.previousElementSibling.classList.contains('expanded')?'Show Less ▴':'Read More ▾'">Read More ▾</button>
     <div class="card-footer">
       <span class="card-lang"></span>
