@@ -9,7 +9,7 @@
       { "label": "Age", "value": "17" },
       { "label": "Type", "value": "Introvert, overthinker" }
     ],
-    "bio": "Server ka owner, dost sabke — par khulke baat kisi se nahi kar paata. Feelings type karta hai, delete karta hai, phir screen lock kar deta hai. Jab kho diya kisi ko — screen se hi utar gaya."
+    "bio": "Server ka owner, dost sabke — par khulke baat kisi se nahi kar paata. Feelings type karta hai, delete karta hai, phir screen lock kar deta hai."
   },
   "Maya": {
     "initials": "M",
@@ -21,7 +21,7 @@
       { "label": "Age", "value": "14" },
       { "label": "Type", "value": "Sweet, mysterious" }
     ],
-    "bio": "Pehli baar me lagta hai sab samajh aa gaya — par har baar kuch naya chhupa hota hai. Pyaar kiya, chhupaaya, phir gayab ho gayi. Wapas aayi toh aise jaise kabhi jaanti hi nahi thi."
+    "bio": "Pehli baar me lagta hai sab samajh aa gaya — par har baar kuch naya chhupa hota hai. Sweet hai, caring hai — par kuch hai jo wo batati nahi."
   },
   "Yash": {
     "initials": "Ya",
@@ -45,6 +45,6 @@
       { "label": "Age", "value": "18" },
       { "label": "Type", "value": "Funny, chaotic" }
     ],
-    "bio": "Bakchodi ka baadshah. Har serious moment ko ek meme bana deta hai — par jab Yadav toot raha tha, sabse pehle serious hua. Yash ke saath milke duniya jalaa de."
+    "bio": "Bakchodi ka baadshah. Har serious moment ko ek meme bana deta hai. Yash ke saath milke duniya jalaa de."
   }
 }
